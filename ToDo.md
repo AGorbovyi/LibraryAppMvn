@@ -78,7 +78,7 @@ Bug №3
 Anton
 
 ===================================================
-Bug №4
+Bug №4 (in Jira)
 ===================================================
 
 **Steps to Reproduce:**
@@ -185,7 +185,7 @@ Yaroslav
 ### Improvement
 
 ===================================================
-Improvement №1 
+Improvement №1 (in jira)
 ===================================================
 
 - The console screen should be cleared when Admin moving to the next menu level
@@ -211,7 +211,7 @@ Larysa
 
 
 ===================================================
-Improvement №3
+Improvement №3 (in jira)
 ===================================================
 
 - Review and rename menu items
