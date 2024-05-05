@@ -2,6 +2,7 @@ package libraryapp.service;
 
 import libraryapp.entity.Book;
 import libraryapp.repository.BookCatalogRepository;
+
 /**
  * AIT-TR, cohort 42.1, Java Basic, Project1
  *
@@ -10,14 +11,14 @@ import libraryapp.repository.BookCatalogRepository;
  */
 
 public class LibraryService {
-    private BookCatalogRepository repository;
+    private final BookCatalogRepository repository;
 
     public LibraryService(BookCatalogRepository repository) {
         this.repository = repository;
     }
 
 
-    public boolean borrowBookFromLibrary(Integer catalogNumber, int userCardNo) {
+    public boolean borrowBookFromLibrary(Integer catalogNumber, int userCardNo, String userName) {
         Book book = repository.get(catalogNumber);
         if (book != null) {
             if (!book.isInLibrary()) {
@@ -28,7 +29,7 @@ public class LibraryService {
                 return false;
             } else {
                 book.setNotInLibrary(userCardNo);
-                System.out.println("Book '" + book.getBookTitle() + "' by " + book.getAuthor() + " has been borrowed.");
+                System.out.println("Book '" + book.getBookTitle() + "' by " + book.getAuthor() + " has been borrowed by" + userName + ".");
                 return true;
             }
         } else {
@@ -46,6 +47,5 @@ public class LibraryService {
             System.out.println("Book with catalog number " + catalogNumber + " is not available in the library.");
         }
     }
-
 }
 
