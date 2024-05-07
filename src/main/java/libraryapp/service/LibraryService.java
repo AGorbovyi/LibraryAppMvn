@@ -2,6 +2,8 @@ package libraryapp.service;
 
 import libraryapp.entity.Book;
 import libraryapp.repository.BookCatalogRepository;
+import libraryapp.entity.User;
+import libraryapp.repository.UserCardRepository;
 
 /**
  * AIT-TR, cohort 42.1, Java Basic, Project1
@@ -12,14 +14,16 @@ import libraryapp.repository.BookCatalogRepository;
 
 public class LibraryService {
     private final BookCatalogRepository repository;
+    private final UserCardRepository userCardRepository;
 
-    public LibraryService(BookCatalogRepository repository) {
+    public LibraryService(BookCatalogRepository repository, UserCardRepository userCardRepository) {
         this.repository = repository;
+        this.userCardRepository = userCardRepository;
     }
 
-
-    public boolean borrowBookFromLibrary(Integer catalogNumber, int userCardNo, String userName) {
+    public boolean borrowBookFromLibrary(Integer catalogNumber, int userCardNo) {
         Book book = repository.get(catalogNumber);
+        User userName = userCardRepository.get(userCardNo).getUser();
         if (book != null) {
             if (!book.isInLibrary()) {
                 if (book.getBorrowedTo() == userCardNo)

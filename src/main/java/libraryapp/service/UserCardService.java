@@ -99,7 +99,7 @@ public class UserCardService {
     }
 
     public void print() {
-        repository.findAll().forEach(System.out::println);
+        repository.values().forEach(System.out::println);
     }
 
     public boolean updateUserCard(int id, String name, String surname) {

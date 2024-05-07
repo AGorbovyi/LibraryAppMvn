@@ -23,7 +23,7 @@ public class LibraryApp {
         userCardRepository.init();
 
         BookCatalogService bookCatalogService = new BookCatalogService(bookCatalog);
-        LibraryService libraryService = new LibraryService(bookCatalog);
+        LibraryService libraryService = new LibraryService(bookCatalog, userCardRepository);
         UserCardService userCardService = new UserCardService(userCardRepository);
 
         AdminMenu adminMenu = new AdminMenu(bookCatalogService, userCardService, libraryService);

@@ -24,12 +24,10 @@ public class AddUserCard implements MenuCommand {
 
     @Override
     public void executeCommand() {
-        int userID=UserInput.getInt("Get User ID: ");
         String userName = UserInput.getText("Get User Name: "); 
-        String userLastName = UserInput.getText("Get User Last Name: ");
-        User user = new User(userID, userName, userLastName);
-        UserCard userCard = new UserCard(user);
-        userCardService.addNewUserCard(userCard);
+        String userSurname = UserInput.getText("Get User Last Name: ");
+        int userId = userCardService.addNewUserCard(userName, userSurname);
+        System.out.println("Book added under catalog number: " + userId);
     }
 
     @Override
