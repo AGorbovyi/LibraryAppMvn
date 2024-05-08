@@ -21,6 +21,7 @@ import libraryapp.ui.button.book.ViewAllBooks;
 import libraryapp.ui.button.library.BorrowBook;
 import libraryapp.ui.button.library.ReturnBook;
 import libraryapp.ui.button.user.*;
+import libraryapp.ui.button.user.ViewAllUserCards;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,6 +78,7 @@ public class AdminMenu {
                 break;
             case 2:
                 AddUserCard addUserCard = new AddUserCard(userCardService);
+                ViewAllUserCards viewAllUserCards = new ViewAllUserCards(userCardService);
                 CloseUserCard closeUserCard = new CloseUserCard(userCardService);
                 FindUserCardByID findUserCardById = new FindUserCardByID(userCardService);
                 FindUserCardByName findUserCardByNames = new FindUserCardByName(userCardService);
@@ -85,6 +87,7 @@ public class AdminMenu {
                 menuCommands.clear();
                 menuCommands.add(null);
                 menuCommands.add(addUserCard);
+                menuCommands.add(viewAllUserCards);
                 menuCommands.add(closeUserCard);
                 menuCommands.add(findUserCardById);
                 menuCommands.add(findUserCardByNames);

@@ -152,7 +152,7 @@ Yaroslav
 ### Feature
 
 ===================================================
-Feature №1
+Feature №1 (in jira)
 ===================================================
 
 - Add menu `FindAll UserCards` inside of `[2] Reader menu`
@@ -194,7 +194,7 @@ Improvement №1 (in jira)
 Anton
 
 ===================================================
-Improvement №2
+Improvement №2 (in jira)
 ===================================================
 
 - Add User's name inside text of `borrowBookFromLibrary` method (service --> LibraryService):
@@ -220,7 +220,7 @@ Improvement №3 (in jira)
 Anton
 
 ===================================================
-Improvement №4
+Improvement №4 (in jira)
 ===================================================
 
 - [2] Reader menu --> [1] Add User Card
@@ -230,7 +230,7 @@ Improvement №4
 Larysa
 
 ===================================================
-Improvement №5
+Improvement №5 (in jira)
 ===================================================
 
 - [2] Reader menu --> [1] Add User Card
