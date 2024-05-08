@@ -46,6 +46,7 @@ public class UserCardRepository implements CrudRepository<Integer, UserCard> {
     public Collection<UserCard> values() {
         return userCards.values();
     }
+
     public Iterable<Object> findAll() {
         return Collections.singleton(userCards.values());
     }

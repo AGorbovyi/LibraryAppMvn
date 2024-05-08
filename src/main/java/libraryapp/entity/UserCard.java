@@ -15,6 +15,7 @@ public class UserCard {
     private int booksLimit;
     private boolean isClosed;
 
+
     public UserCard(User user) {
         this.user = user;
         this.borrowedBooks = new ArrayList<>();

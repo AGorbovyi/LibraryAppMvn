@@ -35,7 +35,7 @@ public class User {
     }
 
     public void setUserId(int lastUserId) {
-        
+
     }
 
     public void setName(String name) {
