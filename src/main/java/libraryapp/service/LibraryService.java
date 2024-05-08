@@ -1,7 +1,12 @@
 package libraryapp.service;
 
 import libraryapp.entity.Book;
+import libraryapp.entity.BookInfo;
 import libraryapp.repository.BookCatalogRepository;
+
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * AIT-TR, cohort 42.1, Java Basic, Project1
  *
@@ -11,23 +16,31 @@ import libraryapp.repository.BookCatalogRepository;
 
 public class LibraryService {
     private BookCatalogRepository repository;
+    private Map<Integer, Integer> borrowedBooksMap;
 
     public LibraryService(BookCatalogRepository repository) {
         this.repository = repository;
+        this.borrowedBooksMap = new HashMap<>();
     }
-
 
     public boolean borrowBookFromLibrary(Integer catalogNumber, int userCardNo) {
         Book book = repository.get(catalogNumber);
         if (book != null) {
-            if (!book.isInLibrary()) {
-                if (book.getBorrowedTo() == userCardNo)
-                    System.out.println("This book is already borrowed to the same reader.");
-                else
-                    System.out.println("This book is already borrowed to another reader.");
+            BookInfo bookInfo = book.getBookInfo();
+            if (!bookInfo.isInLibrary()) {
+                if (borrowedBooksMap.containsKey(catalogNumber)) {
+                    int currentBorrower = borrowedBooksMap.get(catalogNumber);
+                    if (currentBorrower == userCardNo) {
+                        System.out.println("This book is already borrowed to the same reader.");
+                    } else {
+                        System.out.println("This book is already borrowed to another reader.");
+                    }
+                }
                 return false;
             } else {
-                book.setNotInLibrary(userCardNo);
+                bookInfo.setInLibrary(false);
+                bookInfo.setBorrowedTo(userCardNo);
+                borrowedBooksMap.put(catalogNumber, userCardNo);
                 System.out.println("Book '" + book.getBookTitle() + "' by " + book.getAuthor() + " has been borrowed.");
                 return true;
             }
@@ -40,12 +53,13 @@ public class LibraryService {
     public void returnBookToLibrary(Integer catalogNumber) {
         Book book = repository.get(catalogNumber);
         if (book != null) {
-            book.setInLibrary();
+            BookInfo bookInfo = book.getBookInfo();
+            bookInfo.setInLibrary(true);
             System.out.println("Book '" + book.getBookTitle() + "' by " + book.getAuthor() + " has been returned.");
+            borrowedBooksMap.remove(catalogNumber);
         } else {
             System.out.println("Book with catalog number " + catalogNumber + " is not available in the library.");
         }
     }
-
 }
 
