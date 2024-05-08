@@ -8,7 +8,6 @@ package libraryapp.repository;
 
 import libraryapp.entity.User;
 import libraryapp.entity.UserCard;
-
 import java.util.*;
 
 public class UserCardRepository implements CrudRepository<Integer, UserCard> {

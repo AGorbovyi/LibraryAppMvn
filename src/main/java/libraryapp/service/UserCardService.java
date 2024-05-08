@@ -20,7 +20,7 @@ public class UserCardService {
     }
 
     public int addNewUserCard(String userName, String userSurname) {
-        int lastUserId = repository.values().size() + 1;
+        int lastUserId = repository.values().size();
         lastUserId++;
         User user = new User(lastUserId, userName, userSurname);
         UserCard userCard = new UserCard(user);
@@ -34,14 +34,14 @@ public class UserCardService {
             System.out.println("Error: variable name is empty");
             return false;
         }
-        char firstChar =varName.charAt(0);
-        if (!(Character.isLetter(firstChar))){
+        char firstChar = varName.charAt(0);
+        if (!(Character.isLetter(firstChar))) {
             System.out.println("Error: variable name is invalid");
             return false;
         }
-        for (int i=1;i<varName.length();i++){
-            char currentChar=varName.charAt(i);
-            if (Character.isLetterOrDigit(currentChar)||currentChar=='_'){
+        for (int i = 1; i < varName.length(); i++) {
+            char currentChar = varName.charAt(i);
+            if (Character.isLetterOrDigit(currentChar) || currentChar == '_') {
                 System.out.println("Eror: variable name contains invalid characters");
                 return false;
             }
