@@ -1,14 +1,13 @@
 package libraryapp.entity;
+import java.time.LocalDate;
 
 public class Book {
-
     private String author;
     private String bookTitle;
     private String genre;
     private String publisher;
     private Integer catalogNumber;
-    private boolean isInLibrary;
-    private Integer borrowedTo;
+    private BookInfo bookInfo; // Доданий об'єкт BookInfo
 
     public Book(String author, String bookTitle, String genre, String publisher, Integer catalogNumber) {
         this.author = author;
@@ -16,49 +15,66 @@ public class Book {
         this.genre = genre;
         this.publisher = publisher;
         this.catalogNumber = catalogNumber;
-        this.isInLibrary = true;
-        this.borrowedTo = -1;
+        this.bookInfo = new BookInfo(); // Ініціалізуємо об'єкт BookInfo
     }
 
     public String getAuthor() {
-        return this.author;
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public String getBookTitle() {
-        return this.bookTitle;
+        return bookTitle;
+    }
+
+    public void setBookTitle(String bookTitle) {
+        this.bookTitle = bookTitle;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
     }
 
     public Integer getCatalogNumber() {
-        return this.catalogNumber;
+        return catalogNumber;
     }
 
-    public int getBorrowedTo()  {
-        return borrowedTo;
+    public void setCatalogNumber(Integer catalogNumber) {
+        this.catalogNumber = catalogNumber;
     }
 
-    public boolean isInLibrary() {
-        return isInLibrary;
+    public BookInfo getBookInfo() {
+        return bookInfo;
     }
 
-    public void setInLibrary() {
-        this.isInLibrary = true;
-        this.borrowedTo = -1;
-    }
-
-    public void setNotInLibrary(int borrowedTo) {
-        this.isInLibrary = false;
-        this.borrowedTo = borrowedTo;
+    public void setBookInfo(BookInfo bookInfo) {
+        this.bookInfo = bookInfo;
     }
 
     @Override
     public String toString() {
         return "Book{" +
-                "author='" + this.author + '\'' +
-                ", bookTitle='" + this.bookTitle + '\'' +
-                ", genre='" + this.genre + '\'' +
-                ", publisher='" + this.publisher + '\'' +
-                ", catalogNumber=" + this.catalogNumber +
-                ", isInLibrary=" + this.isInLibrary +
+                "author='" + author + '\'' +
+                ", bookTitle='" + bookTitle + '\'' +
+                ", genre='" + genre + '\'' +
+                ", publisher='" + publisher + '\'' +
+                ", catalogNumber=" + catalogNumber +
+                ", bookInfo=" + bookInfo +
                 '}';
     }
 }

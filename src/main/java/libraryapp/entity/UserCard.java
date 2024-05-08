@@ -18,11 +18,13 @@ public class UserCard {
     public UserCard(User user) {
         this.user = user;
         this.borrowedBooks = new ArrayList<>();
+        this.booksLimit = 5;
         this.isClosed = false;
     }
     public boolean borrowBook(Book book) {
-        if (borrowedBooks.size() < booksLimit) {
+        if (booksLimit > 0) {
             borrowedBooks.add(book);
+            booksLimit--;
             return true;
         } else {
             System.out.println("You have reached the limit of borrowed books.");
@@ -32,6 +34,7 @@ public class UserCard {
     public boolean returnBook(Book book) {
         if (borrowedBooks.contains(book)) {
             borrowedBooks.remove(book);
+            booksLimit++;
             return true;
         } else {
             System.out.println("The book is not borrowed by this user.");
