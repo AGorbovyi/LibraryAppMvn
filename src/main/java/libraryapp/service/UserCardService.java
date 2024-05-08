@@ -20,7 +20,7 @@ public class UserCardService {
     }
 
     public int addNewUserCard(String userName, String userSurname) {
-        int lastUserId = repository.values().size() + 1;
+        int lastUserId = repository.values().size();
         lastUserId++;
         User user = new User(lastUserId, userName, userSurname);
         UserCard userCard = new UserCard(user);
