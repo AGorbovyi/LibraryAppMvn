@@ -28,11 +28,22 @@ public class UserCardService {
         return lastUserId;
     }
 
+//    public boolean updateUserCard(int id, String name, String surname) {
+//        UserCard userCard = repository.get(id);
+//        if (userCard != null) {
+//            userCard.getUser().setName(name);
+//            userCard.getUser().setSurname(surname);
+//            return true;
+//        }
+//        return false;
+//    }
+
     public boolean updateUserCard(int id, String name, String surname) {
         UserCard userCard = repository.get(id);
         if (userCard != null) {
             userCard.getUser().setName(name);
             userCard.getUser().setSurname(surname);
+            repository.put(userCard);
             return true;
         }
         return false;
@@ -65,16 +76,16 @@ public class UserCardService {
             }
         }
         if (!found) {
-            System.out.println("User card with name \"" + name + "\"is not found!");
+            System.out.println("Reader card of \"" + name + "\"is not found!");
         }
     }
 
     public void findUserCardById(int userId) {
         UserCard userCard = repository.get(userId);
         if (userCard != null) {
-            System.out.println("User card found! " + userCard);
+            System.out.println("Reader card is found! " + userCard);
         } else {
-            System.out.println("User Card with ID " + userId + " not found");
+            System.out.println("Reader card with ID " + userId + " is not found!");
         }
     }
 

@@ -22,13 +22,13 @@ public class FindUserCardByID implements MenuCommand {
 
     @Override
     public void executeCommand() {
-        int userID=UserInput.getInt("Get User ID: ");
-        userCardService.findUserCardById(userID);
+        int userId = UserInput.getInt("Enter reader ID: ");
+        userCardService.findUserCardById(userId);
     }
 
     @Override
     public String getMenuName() {
-        return "Find User Card by ID";
+        return "Find reader card by ID";
     }
 
     @Override

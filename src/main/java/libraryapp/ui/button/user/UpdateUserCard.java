@@ -24,10 +24,11 @@ public class UpdateUserCard implements MenuCommand {
 
     @Override
     public void executeCommand() {
-        String userName = UserInput.getText("Get reader name: ");
-        String userSurname = UserInput.getText("Get reader last name: ");
-        int userId = userCardService.addNewUserCard(userName, userSurname);
-        System.out.println("Reader card was changed under id: " + userId);
+        int userId=UserInput.getInt("Enter reader ID: ");
+        String userName = UserInput.getText("Enter reader name: ");
+        String userSurname = UserInput.getText("Enter reader last name: ");
+        userCardService.updateUserCard(userId, userName, userSurname);
+        System.out.println("Reader card with ID " + userId + " was successfully changed");
     }
 
     @Override
