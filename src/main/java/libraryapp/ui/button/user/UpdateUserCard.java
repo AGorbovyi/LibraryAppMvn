@@ -13,11 +13,11 @@ import libraryapp.service.UserCardService;
 import libraryapp.service.util.UserInput;
 import libraryapp.ui.button.MenuCommand;
 
-public class AddUserCard implements MenuCommand {
+public class UpdateUserCard implements MenuCommand {
 
     private final UserCardService userCardService;
 
-    public AddUserCard(UserCardService userCardService) {
+    public UpdateUserCard(UserCardService userCardService) {
         this.userCardService = userCardService;
     }
 
@@ -27,12 +27,12 @@ public class AddUserCard implements MenuCommand {
         String userName = UserInput.getText("Get reader name: ");
         String userSurname = UserInput.getText("Get reader last name: ");
         int userId = userCardService.addNewUserCard(userName, userSurname);
-        System.out.println("New reader card was added under id: " + userId);
+        System.out.println("Reader card was changed under id: " + userId);
     }
 
     @Override
     public String getMenuName() {
-        return "Add reader card";
+        return "Change reader card";
     }
 
     @Override

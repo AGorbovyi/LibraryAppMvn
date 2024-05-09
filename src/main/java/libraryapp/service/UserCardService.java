@@ -28,6 +28,16 @@ public class UserCardService {
         return lastUserId;
     }
 
+    public boolean updateUserCard(int id, String name, String surname) {
+        UserCard userCard = repository.get(id);
+        if (userCard != null) {
+            userCard.getUser().setName(name);
+            userCard.getUser().setSurname(surname);
+            return true;
+        }
+        return false;
+    }
+
     static boolean validateVarName(String varName) {
         // check variable name length
         if (varName.length() > 1) {
@@ -102,13 +112,4 @@ public class UserCardService {
         repository.values().forEach(System.out::println);
     }
 
-    public boolean updateUserCard(int id, String name, String surname) {
-        UserCard userCard = repository.get(id);
-        if (userCard != null) {
-            userCard.getUser().setName(name);
-            userCard.getUser().setSurname(surname);
-            return true;
-        }
-        return false;
-    }
 }
