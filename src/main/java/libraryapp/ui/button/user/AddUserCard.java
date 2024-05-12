@@ -1,33 +1,30 @@
 package libraryapp.ui.button.user;
 
+import libraryapp.service.Service;
+import libraryapp.service.UserCardService;
+import libraryapp.service.util.UserInput;
+import libraryapp.ui.button.Button;
+import libraryapp.ui.button.MenuCommand;
+
 /**
  * AIT-TR, cohort 42.1, Java Basic, Project1
  *
  * @author: Anton Gorbovyi
- * @version: 22.04.2024
+ * @version: 12.05.2024
  **/
+public class AddUserCard extends Button  implements MenuCommand {
 
-import libraryapp.entity.User;
-import libraryapp.entity.UserCard;
-import libraryapp.service.UserCardService;
-import libraryapp.service.util.UserInput;
-import libraryapp.ui.button.MenuCommand;
-
-public class AddUserCard implements MenuCommand {
-
-    private final UserCardService userCardService;
-
-    public AddUserCard(UserCardService userCardService) {
-        this.userCardService = userCardService;
+    public AddUserCard(Service service) {
+        super.put(service.getClass().getSimpleName(), service);
     }
 
 
     @Override
     public void executeCommand() {
-        String userName = UserInput.getText("Get reader name: ");
-        String userSurname = UserInput.getText("Get reader last name: ");
-        int userId = userCardService.addNewUserCard(userName, userSurname);
-        System.out.println("New reader card was added under id: " + userId);
+        String userName = UserInput.getText("Enter reader's first name: ");
+        String userSurname = UserInput.getText("Enter reader's last name: ");
+        UserCardService userCardService = (UserCardService) super.getService(UserCardService.class.getSimpleName());
+        userCardService.addNewUserCard(userName, userSurname);
     }
 
     @Override

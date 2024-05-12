@@ -3,13 +3,14 @@ package libraryapp.service;
 import libraryapp.entity.Book;
 import libraryapp.entity.BookInfo;
 import libraryapp.entity.User;
+import libraryapp.entity.UserCard;
 import libraryapp.repository.BookCatalogRepository;
+import libraryapp.repository.CrudRepository;
 import libraryapp.repository.UserCardRepository;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.UUID;
 
 /**
  * AIT-TR, cohort 42.1, Java Basic, Project1
@@ -18,50 +19,56 @@ import java.util.Map;
  * @version 22-Apr-24
  */
 
-public class LibraryService {
-    private final BookCatalogRepository repository;
-    private final UserCardRepository userCardRepository;
-    private final Map<Integer, List<Integer>> userBorrowedBooksMap;
+public class LibraryService extends Service<CrudRepository, String, UserCardService> implements IService<CrudRepository, String, UserCardService>{
 
-    public LibraryService(BookCatalogRepository repository, UserCardRepository userCardRepository) {
-        this.repository = repository;
-        this.userCardRepository = userCardRepository;
-        this.userBorrowedBooksMap = new HashMap<>();
+    public LibraryService(HashMap<String, CrudRepository> repositories) {
+        super(repositories);
     }
 
-    public boolean borrowBookFromLibrary(Integer catalogNumber, int userCardNo) {
-        Book book = repository.get(catalogNumber);
+    public void borrowBookFromLibrary(UUID bookId, UUID userCardId) {
+        UserCardRepository userRepo = (UserCardRepository) super.getRepository(UserCardRepository.class.getSimpleName());
+        BookCatalogRepository bookRepo = (BookCatalogRepository) super.getRepository(BookCatalogRepository.class.getSimpleName());
+        Book book = bookRepo.get(bookId);
         if (book != null) {
             BookInfo bookInfo = book.getBookInfo();
+            if (bookInfo == null){
+                bookInfo=new BookInfo();
+            }
             if (!bookInfo.isInLibrary()) {
-                if (bookInfo.getBorrowedTo() == userCardNo)
+                if (bookInfo.getBorrowedTo() == userCardId) {
                     System.out.println("This book is already borrowed to the same reader.");
+                }
                 else
                     System.out.println("This book is already borrowed to another reader.");
-                return false;
             } else {
                 bookInfo.setInLibrary(false);
-                bookInfo.setBorrowedTo(userCardNo);
-                userBorrowedBooksMap.computeIfAbsent(userCardNo, k -> new ArrayList<>()).add(catalogNumber);
-                User user = userCardRepository.get(userCardNo).getUser();
-                System.out.println("Book '" + book.getBookTitle() + "' by " + book.getAuthor() + " has been borrowed by " + user.getName() + ".");
-                return true;
+                bookInfo.setBorrowedTo(userCardId);
+                bookInfo.setBorrowedDuration(14);
+                bookInfo.setBorrowedDate(LocalDate.now());
+                book.setBookInfo(bookInfo);
+                UserCard userCard = userRepo.get(userCardId);
+                User user = userCard.getUser();
+                userCard.borrowBook(book);
+                System.out.println("Book '" + book.getBookTitle() + "' by " + book.getAuthor() + " has been borrowed by " + user.getUserFullName() + ".");
             }
         } else {
-            System.out.println("Book with catalog number " + catalogNumber + " is not available in the library.");
-            return false;
+            System.out.println("Book with catalog number " + bookId + " is not available in the library.");
         }
     }
 
-    public void returnBookToLibrary(Integer catalogNumber) {
-        Book book = repository.get(catalogNumber);
+    public void returnBookToLibrary(UUID bookId) {
+        UserCardRepository userRepo = (UserCardRepository) super.getRepository(UserCardRepository.class.getSimpleName());
+        BookCatalogRepository bookRepo = (BookCatalogRepository) super.getRepository(BookCatalogRepository.class.getSimpleName());
+        Book book = bookRepo.get(bookId);
         if (book != null) {
             BookInfo bookInfo = book.getBookInfo();
+            if (bookInfo == null) System.out.println("There are no activities with this book!");
             bookInfo.setInLibrary(true);
-            userBorrowedBooksMap.values().forEach(list -> list.remove(catalogNumber));
+            UserCard userCard = userRepo.get(bookInfo.getBorrowedTo());
+            userCard.returnBook(book);
             System.out.println("Book '" + book.getBookTitle() + "' by " + book.getAuthor() + " has been returned.");
         } else {
-            System.out.println("Book with catalog number " + catalogNumber + " is not available in the library.");
+            System.out.println("Book with catalog number " + bookId + " is not available in the library.");
         }
     }
 }

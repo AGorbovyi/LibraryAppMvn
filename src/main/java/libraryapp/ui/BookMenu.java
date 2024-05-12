@@ -1,26 +1,52 @@
 package libraryapp.ui;
 
+import libraryapp.service.BookCatalogService;
+import libraryapp.service.Service;
+import libraryapp.ui.button.Back;
+import libraryapp.ui.button.ExitMenu;
+import libraryapp.ui.button.MenuCommand;
+import libraryapp.ui.button.book.AddBook;
+import libraryapp.ui.button.book.FindBook;
+import libraryapp.ui.button.book.RemoveBook;
+import libraryapp.ui.button.book.ViewAllBooks;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Scanner;
+
 /**
  * AIT-TR, cohort 42.1, Java Basic, Project1
  *
  * @author: Anton Gorbovyi
- * @version: 22.04.2024
+ * @version: 12.05.2024
  **/
+public class BookMenu implements IMenu {
 
-import libraryapp.ui.button.MenuCommand;
+    private List<MenuCommand> commands;
+    private final String menuName;
 
-import java.util.List;
-import java.util.Scanner;
+    public BookMenu(HashMap<String, Service> services, IMenu menu) {
+        this.menuName=this.getClass().getSimpleName();
+        var menuCommands = new ArrayList<MenuCommand>();
+        AddBook addBook = new AddBook(services.get(BookCatalogService.class.getSimpleName()));
+        ViewAllBooks viewAllBooks = new ViewAllBooks(services.get(BookCatalogService.class.getSimpleName()));
+        FindBook findBook = new FindBook(services.get(BookCatalogService.class.getSimpleName()), this);
+        RemoveBook removeBook = new RemoveBook(services.get(BookCatalogService.class.getSimpleName()));
+        Back back = new Back(services.get(BookCatalogService.class.getSimpleName()), menu);
+        ExitMenu exitMenu = new ExitMenu();
+        menuCommands.add(null);
+        menuCommands.add(addBook);
+        menuCommands.add(viewAllBooks);
+        menuCommands.add(findBook);
+        menuCommands.add(removeBook);
+        menuCommands.add(back);
+        menuCommands.add(exitMenu);
+        this.commands = menuCommands;
 
-public class BookMenu {
-
-    private final List<MenuCommand> commands;
-
-    public BookMenu(List<MenuCommand> commands) {
-        this.commands = commands;
     }
 
-    public void startUserMenu() {
+    public void startMenu() {
         Scanner scanner = new Scanner(System.in);
         boolean exitRequested = false;
 
@@ -40,5 +66,17 @@ public class BookMenu {
                 exitRequested = command.shouldExit();
             }
         }
+    }
+
+    @Override
+    public IMenu getMenu(String name) {
+        if(this.getMenuName().equals(name))
+            return this;
+        return null;
+    }
+
+    @Override
+    public String getMenuName() {
+        return this.menuName;
     }
 }

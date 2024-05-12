@@ -1,5 +1,7 @@
 package libraryapp.entity;
 
+import java.util.UUID;
+
 /**
  * AIT-TR, cohort 42.1, Java Basic, Project1
  *
@@ -8,12 +10,12 @@ package libraryapp.entity;
  **/
 
 public class User {
-    private final int userId;
+    private final UUID userId;
     private final String name;
     private final String surname;
 
-    public User(int userId, String name, String surname) {
-        this.userId = userId;
+    public User(String name, String surname) {
+        this.userId = UUID.randomUUID();
         this.name = name;
         this.surname = surname;
     }
@@ -22,20 +24,20 @@ public class User {
         return name;
     }
 
-    public Integer getUserId() {
+    public String getSurname() {
+        return surname;
+    }
+
+    public String getUserFullName() {
+        return getName() + " " + getSurname();
+    }
+
+    public UUID getUserId() {
         return userId;
     }
 
     public User getUser() {
         return this;
-    }
-
-    public void setUserId() {
-        setUserId(0);
-    }
-
-    public void setUserId(int lastUserId) {
-        
     }
 
     public void setName(String name) {
@@ -46,11 +48,8 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "userID=" + userId +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                '}';
+        return "userID=" + getUserId() +
+                ", name='" + getName() + '\'' +
+                ", surname='" + getSurname() + '\'';
     }
-
 }

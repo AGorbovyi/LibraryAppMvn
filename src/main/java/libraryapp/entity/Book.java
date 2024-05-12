@@ -1,21 +1,21 @@
 package libraryapp.entity;
-import java.time.LocalDate;
+
+import java.util.UUID;
 
 public class Book {
+    private final UUID id;
     private String author;
     private String bookTitle;
     private String genre;
     private String publisher;
-    private Integer catalogNumber;
-    private BookInfo bookInfo; // Доданий об'єкт BookInfo
+    private BookInfo bookInfo;
 
-    public Book(String author, String bookTitle, String genre, String publisher, Integer catalogNumber) {
+    public Book(String author, String bookTitle, String genre, String publisher) {
         this.author = author;
         this.bookTitle = bookTitle;
         this.genre = genre;
         this.publisher = publisher;
-        this.catalogNumber = catalogNumber;
-        this.bookInfo = new BookInfo(); // Ініціалізуємо об'єкт BookInfo
+        id = UUID.randomUUID();
     }
 
     public String getAuthor() {
@@ -38,7 +38,7 @@ public class Book {
         return genre;
     }
 
-    public void setGenre(String genre) {
+    public void setGenre(String genre){
         this.genre = genre;
     }
 
@@ -50,31 +50,26 @@ public class Book {
         this.publisher = publisher;
     }
 
-    public Integer getCatalogNumber() {
-        return catalogNumber;
-    }
-
-    public void setCatalogNumber(Integer catalogNumber) {
-        this.catalogNumber = catalogNumber;
+    public UUID getId(){
+        return id;
     }
 
     public BookInfo getBookInfo() {
-        return bookInfo;
+        return this.bookInfo;
     }
-
-    public void setBookInfo(BookInfo bookInfo) {
+    public void setBookInfo(BookInfo bookInfo){
         this.bookInfo = bookInfo;
     }
 
     @Override
     public String toString() {
         return "Book{" +
-                "author='" + author + '\'' +
-                ", bookTitle='" + bookTitle + '\'' +
-                ", genre='" + genre + '\'' +
-                ", publisher='" + publisher + '\'' +
-                ", catalogNumber=" + catalogNumber +
-                ", bookInfo=" + bookInfo +
+                "bookID=" + getId() + '\''+
+                ", author='" + getAuthor() + '\'' +
+                ", bookTitle='" + getBookTitle() + '\'' +
+                ", genre='" + getGenre() + '\'' +
+                ", publisher='" + getPublisher() + '\'' +
+                ", " + bookInfo +
                 '}';
     }
 }

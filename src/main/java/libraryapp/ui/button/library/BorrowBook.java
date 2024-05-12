@@ -1,28 +1,33 @@
 package libraryapp.ui.button.library;
 
+import libraryapp.service.LibraryService;
+import libraryapp.service.Service;
+import libraryapp.service.util.UserInput;
+import libraryapp.ui.button.Button;
+import libraryapp.ui.button.MenuCommand;
+
+import java.util.UUID;
+
 /**
  * AIT-TR, cohort 42.1, Java Basic, Project1
  *
  * @author: Anton Gorbovyi
- * @version: 22.04.2024
+ * @version: 12.05.2024
  **/
+public class BorrowBook extends Button  implements MenuCommand {
 
-import libraryapp.service.LibraryService;
-import libraryapp.service.util.UserInput;
-import libraryapp.ui.button.MenuCommand;
-
-public class BorrowBook implements MenuCommand {
-    private final LibraryService libraryService;
-
-    public BorrowBook(LibraryService service) {
-        this.libraryService = service;
+    public BorrowBook(Service service) {
+        super.put(service.getClass().getSimpleName(), service);
     }
 
     @Override
     public void executeCommand() {
-        int bookId = UserInput.getInt("Book catalog number to be borrowed to the reader: ");
-        int userId = UserInput.getInt("Card ID of the user who borrows a book: ");
-        libraryService.borrowBookFromLibrary(bookId, userId);
+        String bookId = UserInput.getText("Book catalog number to be borrowed to the reader: ");
+        String userId = UserInput.getText("Card ID of the user who borrows a book: ");
+        UUID bookUid = UUID.fromString(bookId);
+        UUID userUid = UUID.fromString(userId);
+        LibraryService libraryService = (LibraryService) super.getService(LibraryService.class.getSimpleName());
+        libraryService.borrowBookFromLibrary(bookUid, userUid);
     }
 
     @Override

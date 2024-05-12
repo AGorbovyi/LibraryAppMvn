@@ -1,39 +1,45 @@
 package libraryapp.service;
+
+import libraryapp.entity.Book;
+import libraryapp.repository.BookCatalogRepository;
+import libraryapp.repository.CrudRepository;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.UUID;
+
 /**
  * AIT-TR, cohort 42.1, Java Basic, Project1
  *
  * @author Boiko Yaroslav
  * @version 22-Apr-24
  */
-import libraryapp.entity.Book;
-import libraryapp.repository.BookCatalogRepository;
 
-import java.util.ArrayList;
-import java.util.List;
+public class BookCatalogService extends Service<CrudRepository, String, BookCatalogService> implements IService<CrudRepository, String, BookCatalogService> {
 
-public class BookCatalogService {
-    private BookCatalogRepository repository;
-
-    public BookCatalogService(BookCatalogRepository repository) {
-        this.repository = repository;
+    public BookCatalogService(HashMap<String, CrudRepository> repository) {
+        super(repository);
     }
 
-    public int addBook(String author, String bookTitle, String genre, String publisher) {
-        int nextCatalogNumber = repository.values().size() + 1;
-        Book book = new Book(author,  bookTitle,  genre,  publisher, nextCatalogNumber);
-        repository.put(book);
-        return nextCatalogNumber;
+    public void addBook(String author, String bookTitle, String genre, String publisher) {
+        Book book = new Book(author,  bookTitle,  genre,  publisher);
+        BookCatalogRepository repo = (BookCatalogRepository) super.getRepository(BookCatalogRepository.class.getSimpleName());
+        repo.put(book);
+        System.out.println("Book added: " + book);
     }
 
 
-    public Book get(Integer catalogNumber ) {
-        return repository.get(catalogNumber);
+    public Book get(UUID bookId ) {
+        BookCatalogRepository repo = (BookCatalogRepository) super.getRepository(BookCatalogRepository.class.getSimpleName());
+        return repo.get(bookId);
     }
 
-    public boolean removeBook(Integer catalogNumber) {
-        Book delBook = repository.get(catalogNumber);
+    public boolean removeBook(UUID bookId) {
+        BookCatalogRepository repo = (BookCatalogRepository) super.getRepository(BookCatalogRepository.class.getSimpleName());
+        Book delBook = repo.get(bookId);
         if (delBook != null) {
-            repository.remove(catalogNumber);
+            repo.remove(delBook);
             return true;
         }
         return false;
@@ -41,41 +47,45 @@ public class BookCatalogService {
 
     public List<Book> findBookByAuthor(String searchQuery) {
         List<Book> result = new ArrayList<>();
-
-        for (Book book : repository.values()) {
+        BookCatalogRepository repo = (BookCatalogRepository) super.getRepository(BookCatalogRepository.class.getSimpleName());
+        for (Book book : repo.values()) {
             if (book.getAuthor().toLowerCase().contains(searchQuery.toLowerCase())) {
                 result.add(book);
             }
         }
 
         if (result.isEmpty()) {
-            System.out.println("No books found with this author: " + searchQuery);
+            System.out.println("No books found by this author: " + searchQuery);
         }
 
         return result;
     }
 
-    public Book findByCatalogNumber(int catalogNumber) {
-        Book foundBook = repository.get(catalogNumber);
+    public Book findByCatalogNumber(UUID bookId) {
+        BookCatalogRepository repo = (BookCatalogRepository) super.getRepository(BookCatalogRepository.class.getSimpleName());
+        Book foundBook = repo.get(bookId);
         if (foundBook == null) {
-            System.out.println("Book with this catalog number " + catalogNumber + " not found.");
+            System.out.println("Book with this catalog number " + bookId + " not found.");
         }
         return foundBook;
     }
     public List<Book> findByTitle(String title) {
         List<Book> result = new ArrayList<>();
-        for (Book book : repository.values()) {
+        BookCatalogRepository repo = (BookCatalogRepository) super.getRepository(BookCatalogRepository.class.getSimpleName());
+        for (Book book : repo.values()) {
             if (book.getBookTitle().toLowerCase().contains(title.toLowerCase())) {
                 result.add(book);
             }
         }
         if (result.isEmpty()) {
-            System.out.println("No books found with this title: " + title);
+            System.out.println("No books found by this title: " + title);
         }
         return result;
     }
 
     public void printCatalog () {
-        repository.values().forEach(System.out::println);
+        BookCatalogRepository repo = (BookCatalogRepository) super.getRepository(BookCatalogRepository.class.getSimpleName());
+        repo.values().forEach(System.out::println);
     }
+
 }

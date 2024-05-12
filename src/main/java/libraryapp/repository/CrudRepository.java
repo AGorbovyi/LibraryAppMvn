@@ -1,6 +1,5 @@
 package libraryapp.repository;
 
-import java.util.Collection;
 /**
  * AIT-TR, cohort 42.1, Java Basic, Project1
  *
@@ -13,7 +12,10 @@ public interface CrudRepository<K, V> {
 
     V get (K key);
 
-    void remove (K key);
+    void remove (V value);
 
-    Collection<V> values();
+    Iterable<V> values();
+
+    void init();
+
 }

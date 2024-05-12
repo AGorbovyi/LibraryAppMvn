@@ -1,5 +1,12 @@
 package libraryapp.ui.button;
 
+/**
+ * AIT-TR, cohort 42.1, Java Basic, Project1
+ *
+ * @author: Anton Gorbovyi
+ * @version: 12.05.2024
+ **/
+
 public class ExitMenu implements MenuCommand {
     @Override
     public void executeCommand() {
