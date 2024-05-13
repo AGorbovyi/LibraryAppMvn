@@ -40,11 +40,11 @@ public class BookCatalogRepository implements CrudRepository<UUID, Book> {
 
     @Override
     public void remove(Book book) {
-        System.out.println("The number of books in library catalog is " + bookMap.size());
+        System.out.println("The number of books in the library catalog is " + bookMap.size());
         if (bookMap.containsValue(book)) {
             bookMap.remove(book.getId());
         }
-        System.out.println("The number of books in library catalog is after removing a book is " + bookMap.size());
+        System.out.println("The number of books in the library catalog is after removing a book is " + bookMap.size());
     }
 
     @Override

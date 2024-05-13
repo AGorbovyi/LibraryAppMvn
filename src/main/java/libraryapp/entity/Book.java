@@ -11,11 +11,11 @@ public class Book {
     private BookInfo bookInfo;
 
     public Book(String author, String bookTitle, String genre, String publisher) {
+        id = UUID.randomUUID();
         this.author = author;
         this.bookTitle = bookTitle;
         this.genre = genre;
         this.publisher = publisher;
-        id = UUID.randomUUID();
     }
 
     public String getAuthor() {
@@ -64,12 +64,12 @@ public class Book {
     @Override
     public String toString() {
         return "Book{" +
-                "bookID=" + getId() + '\''+
+                "bookID=" + getId() +
                 ", author='" + getAuthor() + '\'' +
                 ", bookTitle='" + getBookTitle() + '\'' +
                 ", genre='" + getGenre() + '\'' +
                 ", publisher='" + getPublisher() + '\'' +
-                ", " + bookInfo +
+                ", " + (bookInfo == null? "available" : bookInfo) +
                 '}';
     }
 }
