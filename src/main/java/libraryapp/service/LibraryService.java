@@ -32,21 +32,27 @@ public class LibraryService extends Service<CrudRepository, String, UserCardServ
         if (book != null) {
             BookInfo bookInfo = book.getBookInfo();
             if (bookInfo == null){
-                bookInfo=new BookInfo();
+                bookInfo = new BookInfo();
             }
             if (!bookInfo.isInLibrary()) {
-                if (bookInfo.getBorrowedTo() == userCardId) {
+                if (bookInfo.getBorrowedTo().equals(userCardId)) {
                     System.out.println("This book is already borrowed to the same reader.");
-                }
-                else
+                } else {
                     System.out.println("This book is already borrowed to another reader.");
+                }
             } else {
+
+                UserCard userCard = userRepo.get(userCardId);
+                if (userCard != null && userCard.getUserBorrowedBooks().size() >= userCard.getMaxBooksLimit()) {
+                    System.out.println("You have reached the maximum limit of borrowed books.");
+                    return;
+                }
                 bookInfo.setInLibrary(false);
                 bookInfo.setBorrowedTo(userCardId);
                 bookInfo.setBorrowedDuration(14);
                 bookInfo.setBorrowedDate(LocalDate.now());
+                bookInfo.getReturnDate();
                 book.setBookInfo(bookInfo);
-                UserCard userCard = userRepo.get(userCardId);
                 User user = userCard.getUser();
                 userCard.borrowBook(book);
                 System.out.println("Book '" + book.getBookTitle() + "' by " + book.getAuthor() + " has been borrowed by " + user.getUserFullName() + ".");
