@@ -48,7 +48,10 @@ public class BookInfo {
     }
 
     public LocalDate getReturnDate() {
-        return returnDate;
+        if (borrowedDate != null && borrowedDuration != null) {
+            returnDate = borrowedDate.plusDays(borrowedDuration);
+        }
+        return null;
     }
 
     public void setReturnDate(LocalDate returnDate) {

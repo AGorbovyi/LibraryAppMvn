@@ -16,6 +16,7 @@ public class UserCard {
     private List<Book> borrowedBooks;
     private int booksLimit;
     private boolean isClosed;
+    private  int maxBooksLimit;
 
     public UserCard(User user) {
         this.user = user;
@@ -24,12 +25,8 @@ public class UserCard {
         this.isClosed = false;
     }
     public void borrowBook(Book book) {
-        if (booksLimit > 0) {
             borrowedBooks.add(book);
             booksLimit--;
-        } else {
-            System.out.println("You have reached the limit of borrowed books.");
-        }
     }
     public boolean returnBook(Book book) {
         if (borrowedBooks.contains(book)) {
@@ -73,6 +70,9 @@ public class UserCard {
 
     public void setBooksLimit(int booksLimit) {
         this.booksLimit = booksLimit;
+    }
+    public int getMaxBooksLimit() {
+        return 5;
     }
 
     public void reopenCard() {
