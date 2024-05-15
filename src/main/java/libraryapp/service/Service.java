@@ -1,32 +1,23 @@
 package libraryapp.service;
 
-import java.util.HashMap;
 
-public abstract class Service <T, K, V> implements IService<T,K,V> {
-    private final HashMap<K,T> repository;
-    private HashMap<K,V> services;
-    public Service(HashMap<K,T> repository) {
+
+public abstract class Service<T, K, V> implements IService<T, K, V> {
+    private final T repository;
+    private final V service;
+
+    public Service(T repository, V service) {
         this.repository = repository;
-        this.services=new HashMap<>();
+        this.service = service;
     }
+
     @Override
-    public HashMap<K,T> getRepositories() {
+    public T getRepository() {
         return this.repository;
     }
+
     @Override
-    public HashMap<K,V> getServices(){
-        return this.services;
-    }
-    @Override
-    public V getService(K key){
-        return this.services.get(key);
-    }
-    @Override
-    public T getRepository(K key){
-        return this.repository.get(key);
-    }
-    @Override
-    public void put(K key, V value){
-        this.services.put(key,value);
+    public V getService() {
+        return this.service;
     }
 }

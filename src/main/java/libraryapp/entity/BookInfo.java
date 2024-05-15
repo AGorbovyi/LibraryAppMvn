@@ -1,18 +1,25 @@
 package libraryapp.entity;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
 public class BookInfo {
+    private Integer id; // додане поле id
     private boolean isInLibrary;
-    private UUID borrowedTo;
+    private Integer borrowedTo;
     private LocalDate borrowedDate;
     private Integer borrowedDuration;
     private LocalDate returnDate;
-    
 
     public BookInfo(){
         this.isInLibrary = true;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public boolean isInLibrary() {
@@ -23,11 +30,11 @@ public class BookInfo {
         this.isInLibrary = isInLibrary;
     }
 
-    public UUID getBorrowedTo() {
+    public Integer getBorrowedTo() {
         return borrowedTo;
     }
 
-    public void setBorrowedTo(UUID borrowedTo) {
+    public void setBorrowedTo(Integer borrowedTo) {
         this.borrowedTo = borrowedTo;
     }
 
@@ -51,7 +58,7 @@ public class BookInfo {
         if (borrowedDate != null && borrowedDuration != null) {
             returnDate = borrowedDate.plusDays(borrowedDuration);
         }
-        return null;
+        return returnDate;
     }
 
     public void setReturnDate(LocalDate returnDate) {
@@ -61,10 +68,11 @@ public class BookInfo {
     @Override
     public String toString() {
         return
-                "isInLibrary=" + isInLibrary +
-                ", borrowedTo=" + borrowedTo +
-                ", borrowedDate=" + borrowedDate +
-                ", borrowedDuration=" + borrowedDuration +
-                ", returnDate=" + returnDate;
+                "id=" + id +
+                        ", isInLibrary=" + isInLibrary +
+                        ", borrowedTo=" + borrowedTo +
+                        ", borrowedDate=" + borrowedDate +
+                        ", borrowedDuration=" + borrowedDuration +
+                        ", returnDate=" + returnDate;
     }
 }

@@ -37,10 +37,10 @@ public class LibraryApp {
 
     }
 
-    private static HashMap<String, IMenu> getAdminMenu(HashMap<String, CrudRepository> repositories) {
-        BookCatalogService bookCatalogService = new BookCatalogService(repositories);
-        UserCardService userCardService = new UserCardService(repositories);
-        LibraryService libraryService = new LibraryService(repositories);
+    private static HashMap<String, IMenu> getAdminMenu(HashMap<String, CrudRepository> repository) {
+        BookCatalogService bookCatalogService = new BookCatalogService(repository);
+        UserCardService userCardService = new UserCardService(repository);
+        LibraryService libraryService = new LibraryService(repository);
         HashMap<String, Service> services = new HashMap<>();
         services.put(bookCatalogService.getClass().getSimpleName(), bookCatalogService);
         services.put(userCardService.getClass().getSimpleName(), userCardService);

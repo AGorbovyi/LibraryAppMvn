@@ -1,5 +1,8 @@
 package libraryapp.repository;
 
+
+import java.util.Collection;
+
 /**
  * AIT-TR, cohort 42.1, Java Basic, Project1
  *
@@ -8,14 +11,18 @@ package libraryapp.repository;
  */
 public interface CrudRepository<K, V> {
 
-    void put(V value);
+    void save(V value);
 
-    V get (K key);
+    V get(K id);
 
-    void remove (V value);
+    V get(Integer id);
 
-    Iterable<V> values();
+    boolean remove(Integer id);
+
+    Collection<V> findAll();
 
     void init();
+
+    void deleteAll();
 
 }

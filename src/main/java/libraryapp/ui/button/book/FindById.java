@@ -25,8 +25,7 @@ public class FindById extends Button  implements MenuCommand {
     public void executeCommand() {
         String id = UserInput.getText("Enter book ID: ");
         BookCatalogService bookCatalogService= (BookCatalogService) super.getService(BookCatalogService.class.getSimpleName());
-        UUID uid = UUID.fromString(id);
-        Book book = bookCatalogService.findByCatalogNumber(uid);
+        Book book = bookCatalogService.findByCatalogNumber();
         if (book != null) {
             System.out.println(book);
         } else{

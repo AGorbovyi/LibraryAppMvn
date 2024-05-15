@@ -10,12 +10,12 @@ import java.util.UUID;
  **/
 
 public class User {
-    private final UUID userId;
+    private final Integer id;
     private final String name;
     private final String surname;
 
     public User(String name, String surname) {
-        this.userId = UUID.randomUUID();
+        this.id = null;
         this.name = name;
         this.surname = surname;
     }
@@ -32,8 +32,8 @@ public class User {
         return getName() + " " + getSurname();
     }
 
-    public UUID getUserId() {
-        return userId;
+    public Integer getId() {
+        return id;
     }
 
     public User getUser() {
@@ -48,7 +48,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "userID=" + getUserId() +
+        return "userID=" + getId() +
                 ", name='" + getName() + '\'' +
                 ", surname='" + getSurname() + '\'';
     }
