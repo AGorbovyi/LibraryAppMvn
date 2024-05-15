@@ -32,6 +32,4 @@ public class LibraryApp {
             adminMenu.init();
         }
 
-    }
-
-}
+    }}

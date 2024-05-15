@@ -12,15 +12,41 @@ import libraryapp.entity.UserCard;
 import libraryapp.repository.UserCardRepository;
 
 public class UserCardService {
-    private UserCardRepository repository;
+    private final UserCardRepository repository;
 
     public UserCardService(UserCardRepository repository) {
         this.repository = repository;
 
     }
 
-    public void addNewUserCard(UserCard card) {
-        repository.put(card);
+    public int addNewUserCard(String userName, String userSurname) {
+        int lastUserId = repository.values().size();
+        lastUserId++;
+        User user = new User(lastUserId, userName, userSurname);
+        UserCard userCard = new UserCard(user);
+        repository.put(userCard);
+        return lastUserId;
+    }
+
+    private boolean validateVarName(String varName) {
+        // check variable name length
+        if (varName.length() == 0) {
+            System.out.println("Error: variable name is empty");
+            return false;
+        }
+        char firstChar = varName.charAt(0);
+        if (!(Character.isLetter(firstChar))) {
+            System.out.println("Error: variable name is invalid");
+            return false;
+        }
+        for (int i = 1; i < varName.length(); i++) {
+            char currentChar = varName.charAt(i);
+            if (Character.isLetterOrDigit(currentChar) || currentChar == '_') {
+                System.out.println("Eror: variable name contains invalid characters");
+                return false;
+            }
+        }
+        return true;
     }
 
     public void findUserCardByName(String name) {
@@ -41,7 +67,7 @@ public class UserCardService {
         if (userCard != null) {
             System.out.println("User card found! " + userCard);
         } else {
-            System.out.println("UserCard with ID " + userId + " not found");
+            System.out.println("User Card with ID " + userId + " not found");
         }
     }
 
@@ -60,17 +86,32 @@ public class UserCardService {
         UserCard userCard = repository.get(userId);
         if (userCard != null) {
             userCard.reopenCard();
-            System.out.println("UserCard wiht Id " + userId + " reopened.");
+            System.out.println("UserCard with Id " + userId + " reopened.");
         } else {
             System.out.println("UserCard with ID " + userId + " not found.");
         }
     }
-    public User findUserByBook(Book book){
-        for (UserCard userCard : repository.values()){
-            if (userCard.getUserBookList().contains(book)){
+
+    public User findUserByBook(Book book) {
+        for (UserCard userCard : repository.values()) {
+            if (userCard.getUserBookList().contains(book)) {
                 return userCard.getUser();
             }
         }
         return null;
+    }
+
+    public void print() {
+        repository.findAll().forEach(System.out::println);
+    }
+
+    public boolean updateUserCard(int id, String name, String surname) {
+        UserCard userCard = repository.get(id);
+        if (userCard != null) {
+            userCard.getUser().setName(name);
+            userCard.getUser().setSurname(surname);
+            return true;
+        }
+        return false;
     }
 }

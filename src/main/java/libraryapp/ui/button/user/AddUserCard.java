@@ -7,8 +7,6 @@ package libraryapp.ui.button.user;
  * @version: 22.04.2024
  **/
 
-import libraryapp.entity.User;
-import libraryapp.entity.UserCard;
 import libraryapp.service.UserCardService;
 import libraryapp.service.util.UserInput;
 import libraryapp.ui.button.MenuCommand;
@@ -24,12 +22,10 @@ public class AddUserCard implements MenuCommand {
 
     @Override
     public void executeCommand() {
-        int userID=UserInput.getInt("Get User ID: ");
-        String userName = UserInput.getText("Get User Name: "); 
-        String userLastName = UserInput.getText("Get User Last Name: ");
-        User user = new User(userID, userName, userLastName);
-        UserCard userCard = new UserCard(user);
-        userCardService.addNewUserCard(userCard);
+        String userName = UserInput.getText("Get User Name: ");
+        String userSurname = UserInput.getText("Get User Last Name: ");
+        int userId = userCardService.addNewUserCard(userName, userSurname);
+        System.out.println("Book added under catalog number: " + userId);
     }
 
     @Override

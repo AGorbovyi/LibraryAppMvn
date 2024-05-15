@@ -15,12 +15,12 @@ public class UserCard {
     private int booksLimit;
     private boolean isClosed;
 
+
     public UserCard(User user) {
         this.user = user;
         this.borrowedBooks = new ArrayList<>();
         this.isClosed = false;
     }
-
     public boolean borrowBook(Book book) {
         if (borrowedBooks.size() < booksLimit) {
             borrowedBooks.add(book);
@@ -30,7 +30,6 @@ public class UserCard {
             return false;
         }
     }
-
     public boolean returnBook(Book book) {
         if (borrowedBooks.contains(book)) {
             borrowedBooks.remove(book);
@@ -41,12 +40,12 @@ public class UserCard {
         }
     }
 
-
     public void closeCard() {
         borrowedBooks.clear();
         this.isClosed = true;
     }
-    public List<Book>getUserBorrowedBooks(){
+
+    public List<Book> getUserBorrowedBooks() {
         return borrowedBooks;
     }
 
@@ -95,5 +94,4 @@ public class UserCard {
                 ", isClosed=" + isClosed +
                 '}';
     }
-
 }

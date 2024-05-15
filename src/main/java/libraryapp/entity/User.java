@@ -8,12 +8,12 @@ package libraryapp.entity;
  **/
 
 public class User {
-    private int userID;
-    private String name;
-    private String surname;
+    private final int userId;
+    private final String name;
+    private final String surname;
 
-    public User(int userID, String name, String surname) {
-        this.userID = userID;
+    public User(int userId, String name, String surname) {
+        this.userId = userId;
         this.name = name;
         this.surname = surname;
     }
@@ -23,17 +23,31 @@ public class User {
     }
 
     public Integer getUserId() {
-        return userID;
+        return userId;
     }
 
     public User getUser() {
         return this;
     }
 
+    public void setUserId() {
+        setUserId(0);
+    }
+
+    public void setUserId(int lastUserId) {
+
+    }
+
+    public void setName(String name) {
+    }
+
+    public void setSurname(String surname) {
+    }
+
     @Override
     public String toString() {
         return "User{" +
-                "userID=" + userID +
+                "userID=" + userId +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 '}';

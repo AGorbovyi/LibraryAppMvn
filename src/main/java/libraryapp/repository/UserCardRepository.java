@@ -8,7 +8,6 @@ package libraryapp.repository;
 
 import libraryapp.entity.User;
 import libraryapp.entity.UserCard;
-
 import java.util.*;
 
 public class UserCardRepository implements CrudRepository<Integer, UserCard> {
@@ -26,7 +25,7 @@ public class UserCardRepository implements CrudRepository<Integer, UserCard> {
     @Override
     public UserCard get(Integer key) {
         for (UserCard card : userCards.values()) {
-            if (card.getUserId()==key){
+            if (card.getUserId() == key) {
                 return card;
             }
         }
@@ -35,8 +34,8 @@ public class UserCardRepository implements CrudRepository<Integer, UserCard> {
 
     @Override
     public void remove(Integer key) {
-        for (int i=0; i<userCards.size(); i++) {
-            if (userCards.get(i).getUserId()==key){
+        for (int i = 0; i < userCards.size(); i++) {
+            if (userCards.get(i).getUserId() == key) {
                 userCards.remove(i);
             }
         }
@@ -45,6 +44,10 @@ public class UserCardRepository implements CrudRepository<Integer, UserCard> {
     @Override
     public Collection<UserCard> values() {
         return userCards.values();
+    }
+
+    public Iterable<Object> findAll() {
+        return Collections.singleton(userCards.values());
     }
 
     public void init() {
@@ -61,3 +64,5 @@ public class UserCardRepository implements CrudRepository<Integer, UserCard> {
         }
     }
 }
+
+
