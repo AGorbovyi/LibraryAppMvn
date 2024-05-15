@@ -1,0 +1,41 @@
+
+e
+java:S1192]"JDefine a constant instead of duplicating this literal "bookInfo" 11 times.(¹‡÷ëüÿÿÿÿ
+p
+java:S1192•"TDefine a constant instead of duplicating this literal "Lviv Printing House" 3 times.(¹ÁüÏùÿÿÿÿ
+c
+java:S1192”"GDefine a constant instead of duplicating this literal "Poetry" 4 times.(Î¤İÿÿÿÿÿ
+b
+java:S1192—"FDefine a constant instead of duplicating this literal "Novel" 3 times.(ï¿—‘ıÿÿÿÿ
+k
+java:S1192”"ODefine a constant instead of duplicating this literal "Kyiv Old Guard" 6 times.(Î¤İÿÿÿÿÿ
+f	java:S117+"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(øùüë
+w	java:S116"]Rename this field "BookInfoRepository" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ªÒˆûÿÿÿÿ
+t	java:S116"ZRename this field "java_library_db" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Õø—øøÿÿÿÿ
+z	java:S116"`Rename this field "SQL_CREATE_BOOK_TABLE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(º§‹Ÿÿÿÿÿÿ
+z	java:S116""`Rename this field "SQL_DELETE_BOOK_TABLE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(­Ó­·ÿÿÿÿÿ
+t	java:S116#"ZRename this field "SQL_INSERT_BOOK" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(™¯‡·øÿÿÿÿ
+t	java:S116$"ZRename this field "SQL_UPDATE_BOOK" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¬à¤Éùÿÿÿÿ
+s	java:S116%"^Rename this field "SQL_FIND_BOOK_BY_ID" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ó¯‡ÿ
+r	java:S116&"]Rename this field "SQL_FIND_ALL_BOOKS" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(™¢©ü
+u	java:S116'"`Rename this field "SQL_DELETE_BOOK_BY_ID" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(şç«§
+<
+java:S1170"!Make this final field static too.(º§‹Ÿÿÿÿÿÿ
+<
+java:S1170""!Make this final field static too.(­Ó­·ÿÿÿÿÿ
+<
+java:S1170#"!Make this final field static too.(™¯‡·øÿÿÿÿ
+<
+java:S1170$"!Make this final field static too.(¬à¤Éùÿÿÿÿ
+7
+java:S1170%"!Make this final field static too.(ó¯‡ÿ
+7
+java:S1170&"!Make this final field static too.(™¢©ü
+7
+java:S1170'"!Make this final field static too.(şç«§
+5
+java:S6905%"Don't use the query "SELECT *".(ó¯‡ÿ
+5
+java:S6905&"Don't use the query "SELECT *".(™¢©ü
+Q
+java:S1068"6Remove this unused "BookInfoRepository" private field.(ªÒˆûÿÿÿÿ

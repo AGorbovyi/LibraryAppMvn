@@ -3,11 +3,15 @@ package libraryapp.service.util;
 import java.util.Scanner;
 
 /**
- * UserInput
+ * AIT-TR, cohort 42.1, Java Basic, Project1
+ *
+ * @author Anton Gorbovyi
+ * @version 22-Apr-24
  */
+
 public class UserInput {
 
-    private static Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
 
     public static String getText(String message) {
 
@@ -23,14 +27,14 @@ public class UserInput {
                 val = "";
             }
 
-        } while ( val.length() == 0 );
+        } while (val.isEmpty());
 
         return val;
     }
 
     public static Integer getInt(String message) {
 
-        Integer val = -1;
+        int val = -1;
         System.out.print(message);
 
         do {

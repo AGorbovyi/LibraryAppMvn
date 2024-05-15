@@ -1,25 +1,35 @@
 package libraryapp.ui.button.book;
 
 import libraryapp.service.BookCatalogService;
+import libraryapp.service.Service;
 import libraryapp.service.util.UserInput;
+import libraryapp.ui.button.Button;
 import libraryapp.ui.button.MenuCommand;
 
-public class RemoveBook implements MenuCommand {
+import java.util.UUID;
 
-    private final BookCatalogService bookCatalogService;
+/**
+ * AIT-TR, cohort 42.1, Java Basic, Project1
+ *
+ * @author: Anton Gorbovyi
+ * @version: 12.05.2024
+ **/
+public class RemoveBook extends Button  implements MenuCommand {
 
-    public RemoveBook(BookCatalogService bookCatalogService) {
-        this.bookCatalogService = bookCatalogService;
+    private BookCatalogService service;
+    public RemoveBook(Service service) {
+        this.service= (BookCatalogService) service;
     }
 
     @Override
     public void executeCommand() {
-        int bookCatalogNumberRemove = UserInput.getInt("Enter book catalog number: ");
-        boolean remove = bookCatalogService.removeBook(bookCatalogNumberRemove);
+        String bookCatalogNumberRemove = UserInput.getText("Enter book catalog number: ");
+        UUID uid = UUID.fromString(bookCatalogNumberRemove);
+        boolean remove = service.remove(uid);
         if (remove) {
             System.out.println("Book was removed from catalog");
         } else {
-            System.out.println("Book was not removed");
+            System.out.println("Book with catalog number" + bookCatalogNumberRemove + " was not found!");
         }
     }
 

@@ -1,4 +1,8 @@
 package libraryapp.entity;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * AIT-TR, cohort 42.1, Java Basic, Project1
  *
@@ -6,36 +10,34 @@ package libraryapp.entity;
  * @version 21-Apr-24
  **/
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class UserCard {
+    private Integer id;
     private User user;
     private List<Book> borrowedBooks;
     private int booksLimit;
     private boolean isClosed;
+    private int maxBooksLimit;
 
-
-    public UserCard(User user) {
+    public UserCard(int userId, User user, List<Book> borrowedBooks, int booksLimit, boolean isClosed) {
+        this.id = null;
         this.user = user;
         this.borrowedBooks = new ArrayList<>();
+        this.booksLimit = 5;
         this.isClosed = false;
     }
-    public boolean borrowBook(Book book) {
-        if (borrowedBooks.size() < booksLimit) {
-            borrowedBooks.add(book);
-            return true;
-        } else {
-            System.out.println("You have reached the limit of borrowed books.");
-            return false;
-        }
+
+    public void borrowBook(Book book) {
+        borrowedBooks.add(book);
+        booksLimit--;
     }
+
     public boolean returnBook(Book book) {
         if (borrowedBooks.contains(book)) {
             borrowedBooks.remove(book);
+            booksLimit++;
             return true;
         } else {
-            System.out.println("The book is not borrowed by this user.");
+            System.out.println("The book is not borrowed by this reader.");
             return false;
         }
     }
@@ -73,25 +75,38 @@ public class UserCard {
         this.booksLimit = booksLimit;
     }
 
+    public int getMaxBooksLimit() {
+        return 5;
+    }
+
     public void reopenCard() {
         this.borrowedBooks = new ArrayList<>();
         this.isClosed = false;
     }
 
-    public void setClosed(boolean b) {
-    }
-
     public Integer getUserId() {
-        return this.user.getUserId();
+        return this.user.getId();
     }
 
     @Override
     public String toString() {
         return "UserCard{" +
-                "user=" + user +
+                user +
                 ", borrowedBooks=" + borrowedBooks +
                 ", booksLimit=" + booksLimit +
                 ", isClosed=" + isClosed +
                 '}';
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return this.user.getId();
+    }
+
+    public boolean isClosed() {
+        return false;
     }
 }

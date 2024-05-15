@@ -1,64 +1,79 @@
 package libraryapp.entity;
 
-public class Book {
 
+public class Book {
+    private Integer id;
     private String author;
     private String bookTitle;
     private String genre;
     private String publisher;
-    private Integer catalogNumber;
-    private boolean isInLibrary;
-    private Integer borrowedTo;
+    private BookInfo bookInfo;
 
-    public Book(String author, String bookTitle, String genre, String publisher, Integer catalogNumber) {
+    public Book(Integer id, String author, String bookTitle, String genre, String publisher, Object bookInfo) {
+        this.id = null;
         this.author = author;
         this.bookTitle = bookTitle;
         this.genre = genre;
         this.publisher = publisher;
-        this.catalogNumber = catalogNumber;
-        this.isInLibrary = true;
-        this.borrowedTo = -1;
     }
 
     public String getAuthor() {
-        return this.author;
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public String getBookTitle() {
-        return this.bookTitle;
+        return bookTitle;
     }
 
-    public Integer getCatalogNumber() {
-        return this.catalogNumber;
+    public void setBookTitle(String bookTitle) {
+        this.bookTitle = bookTitle;
     }
 
-    public int getBorrowedTo()  {
-        return borrowedTo;
+    public String getGenre() {
+        return genre;
     }
 
-    public boolean isInLibrary() {
-        return isInLibrary;
+    public void setGenre(String genre) {
+        this.genre = genre;
     }
 
-    public void setInLibrary() {
-        this.isInLibrary = true;
-        this.borrowedTo = -1;
+    public String getPublisher() {
+        return publisher;
     }
 
-    public void setNotInLibrary(int borrowedTo) {
-        this.isInLibrary = false;
-        this.borrowedTo = borrowedTo;
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public BookInfo getBookInfo() {
+        return this.bookInfo;
+    }
+
+    public void setBookInfo(BookInfo bookInfo) {
+        this.bookInfo = bookInfo;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     @Override
     public String toString() {
         return "Book{" +
-                "author='" + this.author + '\'' +
-                ", bookTitle='" + this.bookTitle + '\'' +
-                ", genre='" + this.genre + '\'' +
-                ", publisher='" + this.publisher + '\'' +
-                ", catalogNumber=" + this.catalogNumber +
-                ", isInLibrary=" + this.isInLibrary +
+                "bookID=" + getId() +
+                ", author='" + getAuthor() + '\'' +
+                ", bookTitle='" + getBookTitle() + '\'' +
+                ", genre='" + getGenre() + '\'' +
+                ", publisher='" + getPublisher() + '\'' +
+                ", " + (bookInfo == null ? "available" : bookInfo) +
                 '}';
     }
 }

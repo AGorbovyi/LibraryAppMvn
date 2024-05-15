@@ -1,0 +1,33 @@
+
+t	java:S116	"ZRename this field "java_library_db" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Õø—øøÿÿÿÿ
+	java:S116
+"eRename this field "SQL_CREATE_BOOK_INFO_TABLE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ì•ïŠüÿÿÿÿ
+	java:S116"eRename this field "SQL_DELETE_BOOK_INFO_TABLE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¯Óøõÿÿÿÿÿ
+t	java:S116"_Rename this field "SQL_INSERT_BOOK_INFO" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ñÚ¬
+t	java:S116"_Rename this field "SQL_UPDATE_BOOK_INFO" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‘Ççá
+s	java:S116"^Rename this field "SQL_FIND_BOOK_BY_ID" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ó¯‡ÿ
+}	java:S116"cRename this field "SQL_FIND_BOOK_INFO_BY_ID" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ñÿ²úÿÿÿÿ
+<
+java:S1170
+"!Make this final field static too.(Ì•ïŠüÿÿÿÿ
+<
+java:S1170"!Make this final field static too.(¯Óøõÿÿÿÿÿ
+7
+java:S1170"!Make this final field static too.(ñÚ¬
+7
+java:S1170"!Make this final field static too.(‘Ççá
+7
+java:S1170"!Make this final field static too.(ó¯‡ÿ
+<
+java:S1170"!Make this final field static too.(ñÿ²úÿÿÿÿ
+Y
+java:S1068
+">Remove this unused "SQL_CREATE_BOOK_INFO_TABLE" private field.(Ì•ïŠüÿÿÿÿ
+Y
+java:S1068">Remove this unused "SQL_DELETE_BOOK_INFO_TABLE" private field.(¯Óøõÿÿÿÿÿ
+N
+java:S1068"8Remove this unused "SQL_UPDATE_BOOK_INFO" private field.(‘Ççá
+M
+java:S1068"7Remove this unused "SQL_FIND_BOOK_BY_ID" private field.(ó¯‡ÿ
+W
+java:S1068"<Remove this unused "SQL_FIND_BOOK_INFO_BY_ID" private field.(ñÿ²úÿÿÿÿ

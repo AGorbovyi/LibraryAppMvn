@@ -1,39 +1,35 @@
 package libraryapp.ui.button.book;
 
-import libraryapp.service.BookCatalogService;
+import libraryapp.service.Service;
 import libraryapp.ui.FindBookMenu;
-import libraryapp.ui.button.ExitMenu;
+import libraryapp.ui.IMenu;
+import libraryapp.ui.button.Button;
 import libraryapp.ui.button.MenuCommand;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class FindBook implements MenuCommand {
+/**
+ * AIT-TR, cohort 42.1, Java Basic, Project1
+ *
+ * @author: Anton Gorbovyi
+ * @version: 12.05.2024
+ **/
 
-    private final BookCatalogService bookCatalogService;
+public class FindBook extends Button  implements MenuCommand {
+
     private List<MenuCommand> menuCommands;
+    private final IMenu menu;
 
-
-    public FindBook(BookCatalogService bookCatalogService) {
-        this.bookCatalogService = bookCatalogService;
-        menuCommands = new ArrayList<MenuCommand>();
+    public FindBook(Service service, IMenu menu) {
+        super.put(service.getClass().getSimpleName(), service);
+        menuCommands = new ArrayList<>();
+        this.menu=menu;
     }
 
     @Override
     public void executeCommand() {
-        FindByAuthor author = new FindByAuthor(bookCatalogService);
-        FindByTitle title = new FindByTitle(bookCatalogService);
-        FindById id = new FindById(bookCatalogService);
-        ExitMenu exit = new ExitMenu();
-
-        menuCommands.clear();
-        menuCommands.add(null);
-        menuCommands.add(author);
-        menuCommands.add(title);
-        menuCommands.add(id);
-        menuCommands.add(exit);
-        FindBookMenu findMenu = new FindBookMenu(menuCommands);
-        findMenu.startUserMenu();
+        FindBookMenu findMenu = new FindBookMenu(super.getServices(), menu);
+        findMenu.startMenu();
     }
 
     @Override
