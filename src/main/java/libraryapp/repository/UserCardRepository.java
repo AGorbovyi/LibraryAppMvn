@@ -129,7 +129,7 @@ public class UserCardRepository implements CrudRepository<Integer, UserCard> {
                 new User("Larysa", "Petrova"),
                 new User("Andrey", "Shishkov")
         ));
-        for (User user : usersList) {
+        for (UserCard user : usersList) {
             save(user);
         }
     }

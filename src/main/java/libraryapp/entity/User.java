@@ -1,5 +1,6 @@
 package libraryapp.entity;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -10,9 +11,10 @@ import java.util.UUID;
  **/
 
 public class User {
-    private final Integer id;
-    private final String name;
+    private Integer id;
+    private String name;
     private final String surname;
+    private List<UserCard> userCards;
 
     public User(String name, String surname) {
         this.id = null;
@@ -41,11 +43,13 @@ public class User {
     }
 
     public void setName(String name) {
+        this.name=name;
     }
 
     public void setSurname(String surname) {
     }
     public void setId(Integer id) {
+        this.id = id;
     }
     @Override
     public String toString() {
