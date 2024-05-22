@@ -55,11 +55,11 @@ public class BookInfoRepository implements CrudRepository<Integer, BookInfo> {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 bookInfo = new BookInfo();
-                bookInfo.setInLibrary(rs.getBoolean("isInLibrary"));
-                bookInfo.setBorrowedTo(rs.getInt("borrowedTo"));
-                bookInfo.setBorrowedDate(rs.getDate("borrowedDate") != null ? rs.getDate("borrowedDate").toLocalDate() : null);
-                bookInfo.setBorrowedDuration(rs.getInt("borrowedDuration"));
-                bookInfo.setReturnDate(rs.getDate("returnDate") != null ? rs.getDate("returnDate").toLocalDate() : null);
+                bookInfo.setInLibrary(rs.getBoolean("is_in_library"));
+                bookInfo.setBorrowedTo(rs.getInt("borrowed_to"));
+                bookInfo.setBorrowedDate(rs.getDate("borrowed_date") != null ? rs.getDate("borrowed_date").toLocalDate() : null);
+                bookInfo.setBorrowedDuration(rs.getInt("borrowed_duration"));
+                bookInfo.setReturnDate(rs.getDate("return_date") != null ? rs.getDate("return_date").toLocalDate() : null);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -87,11 +87,11 @@ public class BookInfoRepository implements CrudRepository<Integer, BookInfo> {
             ResultSet rs = stmt.executeQuery(SQL_FIND_ALL_BOOK_INFO);
             while (rs.next()) {
                 BookInfo bookInfo = new BookInfo();
-                bookInfo.setInLibrary(rs.getBoolean("isInLibrary"));
-                bookInfo.setBorrowedTo(rs.getInt("borrowedTo"));
-                bookInfo.setBorrowedDate(rs.getDate("borrowedDate").toLocalDate());
-                bookInfo.setBorrowedDuration(rs.getInt("borrowedDuration"));
-                bookInfo.setReturnDate(rs.getDate("returnDate").toLocalDate());
+                bookInfo.setInLibrary(rs.getBoolean("is_in_library"));
+                bookInfo.setBorrowedTo(rs.getInt("borrowed_to"));
+                bookInfo.setBorrowedDate(rs.getDate("borrowed_date").toLocalDate());
+                bookInfo.setBorrowedDuration(rs.getInt("borrowed_duration"));
+                bookInfo.setReturnDate(rs.getDate("return_date").toLocalDate());
                 bookInfos.add(bookInfo);
             }
         } catch (SQLException e) {

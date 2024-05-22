@@ -39,10 +39,10 @@ public class BookRepository implements CrudRepository<Integer, Book> {
     private final String SQL_DELETE_BOOK_BY_ID = "DELETE FROM book WHERE id = ?";
     private final String SQL_DELETE_BOOK_INFO_BY_ID = "DELETE FROM book_info WHERE id = ?";
 
-    public BookCatalogRepository() {
+    public BookRepository() {
     }
 
-    public BookCatalogRepository(String java_library_db) {
+    public BookRepository(String java_library_db) {
         this.java_library_db = java_library_db;
         this.bookInfoRepository = new BookInfoRepository(java_library_db);
         init();
@@ -109,9 +109,9 @@ public class BookRepository implements CrudRepository<Integer, Book> {
             ResultSet rsBook = psBook.executeQuery();
             if (rsBook.next()) {
                 book = new Book(
-                        rsBook.getInt("id"),
+                        rsBook.getInt("book_id"),
                         rsBook.getString("author"),
-                        rsBook.getString("bookTitle"),
+                        rsBook.getString("title"),
                         rsBook.getString("genre"),
                         rsBook.getString("publisher"),
                         null); // We'll set bookInfo later
@@ -119,12 +119,12 @@ public class BookRepository implements CrudRepository<Integer, Book> {
                 psBookInfo.setInt(1, id);
                 ResultSet rsBookInfo = psBookInfo.executeQuery();
                 if (rsBookInfo.next()) {
-                    bookInfo.setId(rsBookInfo.getInt("id"));
-                    bookInfo.setInLibrary(rsBookInfo.getBoolean("isInLibrary"));
-                    bookInfo.setBorrowedTo(rsBookInfo.getInt("borrowedTo"));
-                    bookInfo.setBorrowedDate(rsBookInfo.getDate("borrowedDate").toLocalDate());
-                    bookInfo.setBorrowedDuration(rsBookInfo.getInt("borrowedDuration"));
-                    bookInfo.setReturnDate(rsBookInfo.getDate("returnDate").toLocalDate());
+                    bookInfo.setId(rsBookInfo.getInt("book_info_id"));
+                    bookInfo.setInLibrary(rsBookInfo.getBoolean("is_in_library"));
+                    bookInfo.setBorrowedTo(rsBookInfo.getInt("borrowed_to"));
+                    bookInfo.setBorrowedDate(rsBookInfo.getDate("borrowed_date").toLocalDate());
+                    bookInfo.setBorrowedDuration(rsBookInfo.getInt("borrowed_duration"));
+                    bookInfo.setReturnDate(rsBookInfo.getDate("return_date").toLocalDate());
                     book.setBookInfo(bookInfo);
                 }
             }
@@ -159,9 +159,9 @@ public class BookRepository implements CrudRepository<Integer, Book> {
             ResultSet rsBook = stmtBook.executeQuery(SQL_FIND_ALL_BOOKS);
             while (rsBook.next()) {
                 Book book = new Book(
-                        rsBook.getInt("id"),
+                        rsBook.getInt("book_id"),
                         rsBook.getString("author"),
-                        rsBook.getString("bookTitle"),
+                        rsBook.getString("title"),
                         rsBook.getString("genre"),
                         rsBook.getString("publisher"),
                         null); // We'll set bookInfo later
@@ -171,12 +171,12 @@ public class BookRepository implements CrudRepository<Integer, Book> {
                     psBookInfo.setInt(1, book.getBookId());
                     ResultSet rsBookInfo = psBookInfo.executeQuery();
                     if (rsBookInfo.next()) {
-                        bookInfo.setId(rsBookInfo.getInt("id"));
-                        bookInfo.setInLibrary(rsBookInfo.getBoolean("isInLibrary"));
-                        bookInfo.setBorrowedTo(rsBookInfo.getInt("borrowedTo"));
-                        bookInfo.setBorrowedDate(rsBookInfo.getDate("borrowedDate").toLocalDate());
-                        bookInfo.setBorrowedDuration(rsBookInfo.getInt("borrowedDuration"));
-                        bookInfo.setReturnDate(rsBookInfo.getDate("returnDate").toLocalDate());
+                        bookInfo.setId(rsBookInfo.getInt("book_info_id"));
+                        bookInfo.setInLibrary(rsBookInfo.getBoolean("is_in_library"));
+                        bookInfo.setBorrowedTo(rsBookInfo.getInt("borrowed_to"));
+                        bookInfo.setBorrowedDate(rsBookInfo.getDate("borrowed_date").toLocalDate());
+                        bookInfo.setBorrowedDuration(rsBookInfo.getInt("borrowed_duration"));
+                        bookInfo.setReturnDate(rsBookInfo.getDate("return_date").toLocalDate());
                         book.setBookInfo(bookInfo);
                     }
                 }
@@ -221,9 +221,9 @@ public class BookRepository implements CrudRepository<Integer, Book> {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 Book book = new Book(
-                        resultSet.getInt("id"),
+                        resultSet.getInt("book_id"),
                         resultSet.getString("author"),
-                        resultSet.getString("bookTitle"),
+                        resultSet.getString("title"),
                         resultSet.getString("genre"),
                         resultSet.getString("publisher"),
                         null
@@ -248,9 +248,9 @@ public class BookRepository implements CrudRepository<Integer, Book> {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 Book book = new Book(
-                        resultSet.getInt("id"),
+                        resultSet.getInt("book_id"),
                         resultSet.getString("author"),
-                        resultSet.getString("bookTitle"),
+                        resultSet.getString("title"),
                         resultSet.getString("genre"),
                         resultSet.getString("publisher"),
                         null
