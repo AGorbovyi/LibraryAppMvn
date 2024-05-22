@@ -1,7 +1,6 @@
 package libraryapp.entity;
 
 import java.util.List;
-import java.util.UUID;
 
 /**
  * AIT-TR, cohort 42.1, Java Basic, Project1
