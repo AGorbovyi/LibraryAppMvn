@@ -25,13 +25,13 @@ public class BookCatalogRepository implements CrudRepository<UUID, Book> {
 
     @Override
     public void put (Book book) {
-        bookMap.put(book.getId(), book);
+        bookMap.put(book.getBookId(), book);
     }
 
     @Override
     public Book get(UUID bookId) {
         for (var book : bookMap.values()){
-            if (book.getId().equals(bookId)){
+            if (book.getBookId().equals(bookId)){
                 return book;
             }
         }
@@ -42,7 +42,7 @@ public class BookCatalogRepository implements CrudRepository<UUID, Book> {
     public void remove(Book book) {
         System.out.println("The number of books in the library catalog is " + bookMap.size());
         if (bookMap.containsValue(book)) {
-            bookMap.remove(book.getId());
+            bookMap.remove(book.getBookId());
         }
         System.out.println("The number of books in the library catalog is after removing a book is " + bookMap.size());
     }

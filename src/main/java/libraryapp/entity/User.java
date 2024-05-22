@@ -1,7 +1,5 @@
 package libraryapp.entity;
 
-import java.util.UUID;
-
 /**
  * AIT-TR, cohort 42.1, Java Basic, Project1
  *
@@ -10,29 +8,29 @@ import java.util.UUID;
  **/
 
 public class User {
-    private final UUID userId;
-    private final String name;
-    private final String surname;
+    private final Integer userId;
+    private final String firstName;
+    private final String lastName;
 
-    public User(String name, String surname) {
-        this.userId = UUID.randomUUID();
-        this.name = name;
-        this.surname = surname;
+    public User(String firstName, String lastName) {
+        this.userId = null;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getLastName() {
+        return lastName;
     }
 
     public String getUserFullName() {
-        return getName() + " " + getSurname();
+        return getFirstName() + " " + getLastName();
     }
 
-    public UUID getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
@@ -40,16 +38,16 @@ public class User {
         return this;
     }
 
-    public void setName(String name) {
+    public void setFirstName(String firstName) {
     }
 
-    public void setSurname(String surname) {
+    public void setLastName(String lastName) {
     }
 
     @Override
     public String toString() {
         return "userID=" + getUserId() +
-                ", name='" + getName() + '\'' +
-                ", surname='" + getSurname() + '\'';
+                ", name='" + getFirstName() + '\'' +
+                ", surname='" + getLastName() + '\'';
     }
 }

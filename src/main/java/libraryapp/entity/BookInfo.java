@@ -1,11 +1,11 @@
 package libraryapp.entity;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
 public class BookInfo {
+    private Integer bookInfoId;
     private boolean isInLibrary;
-    private UUID borrowedTo;
+    private Integer borrowedTo;
     private LocalDate borrowedDate;
     private Integer borrowedDuration;
     private LocalDate returnDate;
@@ -13,6 +13,14 @@ public class BookInfo {
 
     public BookInfo(){
         this.isInLibrary = true;
+    }
+
+    public Integer getBookInfoId() {
+        return bookInfoId;
+    }
+
+    public void setBookInfoId(Integer bookInfoId) {
+        this.bookInfoId = bookInfoId;
     }
 
     public boolean isInLibrary() {
@@ -23,11 +31,11 @@ public class BookInfo {
         this.isInLibrary = isInLibrary;
     }
 
-    public UUID getBorrowedTo() {
+    public Integer getBorrowedTo() {
         return borrowedTo;
     }
 
-    public void setBorrowedTo(UUID borrowedTo) {
+    public void setBorrowedTo(Integer borrowedTo) {
         this.borrowedTo = borrowedTo;
     }
 

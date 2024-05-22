@@ -6,7 +6,6 @@ import libraryapp.entity.UserCard;
 import libraryapp.repository.CrudRepository;
 import libraryapp.repository.UserCardRepository;
 import java.util.HashMap;
-import java.util.UUID;
 
 /**
  * AIT-TR, cohort 42.1, Java Basic, Project1
@@ -32,7 +31,7 @@ public class UserCardService extends Service<CrudRepository, String, UserCardSer
     public UserCard findUserCardByName(String name) {
         UserCardRepository repo = (UserCardRepository) super.getRepository(UserCardRepository.class.getSimpleName());
         for (UserCard userCard : repo.values())
-            if (userCard.getUser().getName().equalsIgnoreCase(name)) {
+            if (userCard.getUser().getFirstName().equalsIgnoreCase(name)) {
                 System.out.println("Reader card found");
                 return userCard;
             }
@@ -40,7 +39,7 @@ public class UserCardService extends Service<CrudRepository, String, UserCardSer
         return null;
     }
 
-    public UserCard findUserCardById(UUID userId) {
+    public UserCard findUserCardById(Integer userId) {
         UserCardRepository repo = (UserCardRepository) super.getRepository(UserCardRepository.class.getSimpleName());
         UserCard userCard = repo.get(userId);
         if (userCard != null) {
@@ -51,7 +50,7 @@ public class UserCardService extends Service<CrudRepository, String, UserCardSer
         return userCard;
     }
 
-    public boolean closeUserCard(UUID userId) {
+    public boolean closeUserCard(Integer userId) {
         UserCardRepository repo = (UserCardRepository) super.getRepository(UserCardRepository.class.getSimpleName());
         UserCard userCard = repo.get(userId);
         if (userCard != null) {
@@ -63,7 +62,7 @@ public class UserCardService extends Service<CrudRepository, String, UserCardSer
         }
     }
 
-    public void reopenUserCard(UUID userId) {
+    public void reopenUserCard(Integer userId) {
         UserCardRepository repo = (UserCardRepository) super.getRepository(UserCardRepository.class.getSimpleName());
         UserCard userCard = repo.get(userId);
         if (userCard != null) {

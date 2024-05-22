@@ -1,9 +1,7 @@
 package libraryapp.entity;
 
-import java.util.UUID;
-
 public class Book {
-    private final UUID id;
+    private final Integer bookId;
     private String author;
     private String bookTitle;
     private String genre;
@@ -11,7 +9,6 @@ public class Book {
     private BookInfo bookInfo;
 
     public Book(String author, String bookTitle, String genre, String publisher) {
-        id = UUID.randomUUID();
         this.author = author;
         this.bookTitle = bookTitle;
         this.genre = genre;
@@ -50,8 +47,8 @@ public class Book {
         this.publisher = publisher;
     }
 
-    public UUID getId(){
-        return id;
+    public Integer getBookId(){
+        return bookId;
     }
 
     public BookInfo getBookInfo() {
@@ -64,7 +61,7 @@ public class Book {
     @Override
     public String toString() {
         return "Book{" +
-                "bookID=" + getId() +
+                "bookID=" + getBookId() +
                 ", author='" + getAuthor() + '\'' +
                 ", bookTitle='" + getBookTitle() + '\'' +
                 ", genre='" + getGenre() + '\'' +

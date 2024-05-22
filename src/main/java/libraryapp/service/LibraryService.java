@@ -7,10 +7,9 @@ import libraryapp.entity.UserCard;
 import libraryapp.repository.BookCatalogRepository;
 import libraryapp.repository.CrudRepository;
 import libraryapp.repository.UserCardRepository;
-
 import java.time.LocalDate;
 import java.util.HashMap;
-import java.util.UUID;
+
 
 /**
  * AIT-TR, cohort 42.1, Java Basic, Project1
@@ -25,7 +24,7 @@ public class LibraryService extends Service<CrudRepository, String, UserCardServ
         super(repositories);
     }
 
-    public void borrowBookFromLibrary(UUID bookId, UUID userCardId) {
+    public void borrowBookFromLibrary(Integer bookId, Integer userCardId) {
         UserCardRepository userRepo = (UserCardRepository) super.getRepository(UserCardRepository.class.getSimpleName());
         BookCatalogRepository bookRepo = (BookCatalogRepository) super.getRepository(BookCatalogRepository.class.getSimpleName());
         Book book = bookRepo.get(bookId);
@@ -62,7 +61,7 @@ public class LibraryService extends Service<CrudRepository, String, UserCardServ
         }
     }
 
-    public void returnBookToLibrary(UUID bookId) {
+    public void returnBookToLibrary(Integer bookId) {
         UserCardRepository userRepo = (UserCardRepository) super.getRepository(UserCardRepository.class.getSimpleName());
         BookCatalogRepository bookRepo = (BookCatalogRepository) super.getRepository(BookCatalogRepository.class.getSimpleName());
         Book book = bookRepo.get(bookId);

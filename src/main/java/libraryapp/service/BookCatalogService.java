@@ -3,11 +3,9 @@ package libraryapp.service;
 import libraryapp.entity.Book;
 import libraryapp.repository.BookCatalogRepository;
 import libraryapp.repository.CrudRepository;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * AIT-TR, cohort 42.1, Java Basic, Project1
@@ -30,12 +28,12 @@ public class BookCatalogService extends Service<CrudRepository, String, BookCata
     }
 
 
-    public Book get(UUID bookId ) {
+    public Book get(Integer bookId ) {
         BookCatalogRepository repo = (BookCatalogRepository) super.getRepository(BookCatalogRepository.class.getSimpleName());
         return repo.get(bookId);
     }
 
-    public boolean removeBook(UUID bookId) {
+    public boolean removeBook(Integer bookId) {
         BookCatalogRepository repo = (BookCatalogRepository) super.getRepository(BookCatalogRepository.class.getSimpleName());
         Book delBook = repo.get(bookId);
         if (delBook != null) {
@@ -61,7 +59,7 @@ public class BookCatalogService extends Service<CrudRepository, String, BookCata
         return result;
     }
 
-    public Book findByCatalogNumber(UUID bookId) {
+    public Book findByCatalogNumber(Integer bookId) {
         BookCatalogRepository repo = (BookCatalogRepository) super.getRepository(BookCatalogRepository.class.getSimpleName());
         Book foundBook = repo.get(bookId);
         if (foundBook == null) {

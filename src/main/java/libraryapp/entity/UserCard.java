@@ -2,7 +2,6 @@ package libraryapp.entity;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * AIT-TR, cohort 42.1, Java Basic, Project1
@@ -12,11 +11,12 @@ import java.util.UUID;
  **/
 
 public class UserCard {
+    private Integer userCardId;
     private User user;
     private List<Book> borrowedBooks;
-    private int booksLimit;
+    private Integer booksLimit;
     private boolean isClosed;
-    private  int maxBooksLimit;
+    private  Integer maxBooksLimit;
 
     public UserCard(User user) {
         this.user = user;
@@ -80,7 +80,7 @@ public class UserCard {
         this.isClosed = false;
     }
 
-    public UUID getUserId() {
+    public Integer getUserId() {
         return this.user.getUserId();
     }
 
