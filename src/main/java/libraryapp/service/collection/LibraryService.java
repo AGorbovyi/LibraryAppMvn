@@ -1,17 +1,13 @@
-package libraryapp.service;
+package libraryapp.service.collection;
 
-//import libraryapp.repository.collection.BookCatalogRepository;
-//import libraryapp.repository.collection.CrudRepository;
-//import libraryapp.repository.collection.UserCardRepository;
 import libraryapp.entity.Book;
 import libraryapp.entity.BookInfo;
 import libraryapp.entity.User;
 import libraryapp.entity.UserCard;
-import libraryapp.repository.db.CrudRepository;
-import libraryapp.repository.db.BookRepository;
-import libraryapp.repository.db.BookInfoRepository;
-import libraryapp.repository.db.UserRepository;
-import libraryapp.repository.db.UserCardRepository;
+import libraryapp.repository.collection.BookCatalogRepository;
+import libraryapp.repository.collection.CrudRepository;
+import libraryapp.repository.collection.UserCardRepository;
+
 import java.time.LocalDate;
 import java.util.HashMap;
 
@@ -23,17 +19,15 @@ import java.util.HashMap;
  * @version 22-Apr-24
  */
 
-public class LibraryService extends Service<CrudRepository, String, UserCardService> implements IService<CrudRepository, String, UserCardService>{
+public class LibraryService extends Service<CrudRepository, String, UserCardService> implements IService<CrudRepository, String, UserCardService> {
 
     public LibraryService(HashMap<String, CrudRepository> repositories) {
         super(repositories);
     }
 
     public void borrowBookFromLibrary(Integer bookId, Integer userCardId) {
-        UserCardRepository userCardRepo = (UserCardRepository) super.getRepository(UserCardRepository.class.getSimpleName());
-        UserRepository userRepo = (UserRepository) super.getRepository(UserRepository.class.getSimpleName());
-        BookRepository bookRepo = (BookRepository) super.getRepository(BookRepository.class.getSimpleName());
-        BookInfoRepository bookInfoRepo = (BookInfoRepository) super.getRepository(BookInfoRepository.class.getSimpleName());
+        UserCardRepository userRepo = (UserCardRepository) super.getRepository(UserCardRepository.class.getSimpleName());
+        BookCatalogRepository bookRepo = (BookCatalogRepository) super.getRepository(BookCatalogRepository.class.getSimpleName());
         Book book = bookRepo.get(bookId);
         if (book != null) {
             BookInfo bookInfo = book.getBookInfo();
@@ -70,16 +64,14 @@ public class LibraryService extends Service<CrudRepository, String, UserCardServ
     }
 
     public void returnBookToLibrary(Integer bookId) {
-        UserCardRepository userCardRepo = (UserCardRepository) super.getRepository(UserCardRepository.class.getSimpleName());
-        UserRepository userRepo = (UserRepository) super.getRepository(UserRepository.class.getSimpleName());
-        BookRepository bookRepo = (BookRepository) super.getRepository(BookRepository.class.getSimpleName());
-        BookInfoRepository bookInfoRepo = (BookInfoRepository) super.getRepository(BookInfoRepository.class.getSimpleName());
+        UserCardRepository userRepo = (UserCardRepository) super.getRepository(UserCardRepository.class.getSimpleName());
+        BookCatalogRepository bookRepo = (BookCatalogRepository) super.getRepository(BookCatalogRepository.class.getSimpleName());
         Book book = bookRepo.get(bookId);
         if (book != null) {
             BookInfo bookInfo = book.getBookInfo();
             if (bookInfo == null) System.out.println("There are no activities with this book!");
             bookInfo.setInLibrary(true);
-            UserCard userCard = userCardRepo.get(bookInfo.getBorrowedTo());
+            UserCard userCard = userRepo.get(bookInfo.getBorrowedTo());
             userCard.returnBook(book);
             System.out.println("Book '" + book.getBookTitle() + "' by " + book.getAuthor() + " has been returned.");
         } else {

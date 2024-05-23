@@ -1,4 +1,4 @@
-package libraryapp.repository;
+package libraryapp.repository.collection;
 
 /**
  * AIT-TR, cohort 42.1, Java Basic, Project1

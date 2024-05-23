@@ -1,4 +1,4 @@
-package libraryapp.repository.DB;
+package libraryapp.repository.db;
 
 import libraryapp.entity.BookInfo;
 import java.sql.*;
@@ -20,6 +20,9 @@ public class BookInfoRepository implements CrudRepository<Integer, BookInfo> {
     private final String SQL_FIND_BOOK_INFO_BY_ID = "SELECT * FROM book_info WHERE id = ?";
     private final String SQL_FIND_ALL_BOOK_INFO = "SELECT * FROM book_info";
     private final String SQL_DELETE_BOOK_INFO_BY_ID = "DELETE FROM book_info WHERE id = ?";
+
+    public BookInfoRepository() {
+    }
 
     public BookInfoRepository(String java_library_db) {
         this.java_library_db = java_library_db;

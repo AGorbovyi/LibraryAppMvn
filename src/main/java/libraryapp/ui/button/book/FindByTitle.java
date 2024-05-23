@@ -1,7 +1,7 @@
 package libraryapp.ui.button.book;
 
 import libraryapp.entity.Book;
-import libraryapp.service.BookCatalogService;
+import libraryapp.service.BookService;
 import libraryapp.service.Service;
 import libraryapp.service.util.UserInput;
 import libraryapp.ui.button.Button;
@@ -24,8 +24,8 @@ public class FindByTitle extends Button  implements MenuCommand {
     @Override
     public void executeCommand() {
         String title = UserInput.getText("Enter book title: ");
-        BookCatalogService bookCatalogService = (BookCatalogService) super.getService(BookCatalogService.class.getSimpleName());
-        List<Book> books = bookCatalogService.findByTitle(title);
+        BookService bookService = (BookService) super.getService(BookService.class.getSimpleName());
+        List<Book> books = bookService.findByTitle(title);
         if (books.size() > 0) {
             for (Book book : books) {
                 System.out.println(book);

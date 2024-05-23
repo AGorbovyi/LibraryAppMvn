@@ -1,4 +1,4 @@
-package libraryapp.repository.DB;
+package libraryapp.repository.db;
 
 /**
  * AIT-TR, cohort 42.1, Java Basic, Project1
@@ -7,7 +7,6 @@ package libraryapp.repository.DB;
  * @version 21-Apr-24
  **/
 
-import libraryapp.entity.Book;
 import libraryapp.entity.User;
 import libraryapp.entity.UserCard;
 import java.sql.Connection;
@@ -36,6 +35,9 @@ public class UserCardRepository implements CrudRepository<Integer, UserCard> {
     private final String SQL_GET = "SELECT * FROM user_card WHERE id = ? ";
     private final String SQL_DELETE_BY_ID = "DELETE FROM user_card WHERE id =? ";
     private final String SQL_FIND_ALL = "SELECT * FROM user_card ";
+
+    public UserCardRepository() {
+    }
 
     public UserCardRepository(String javaLibraryDb) {
         this.javaLibraryDb = javaLibraryDb;

@@ -1,9 +1,15 @@
 package libraryapp;
 
-import libraryapp.repository.BookCatalogRepository;
-import libraryapp.repository.CrudRepository;
-import libraryapp.repository.UserCardRepository;
-import libraryapp.service.BookCatalogService;
+//import libraryapp.repository.collection.BookCatalogRepository;
+//import libraryapp.repository.collection.CrudRepository;
+//import libraryapp.repository.collection.UserCardRepository;
+
+import libraryapp.repository.db.CrudRepository;
+import libraryapp.repository.db.BookRepository;
+import libraryapp.repository.db.BookInfoRepository;
+import libraryapp.repository.db.UserRepository;
+import libraryapp.repository.db.UserCardRepository;
+import libraryapp.service.BookService;
 import libraryapp.service.LibraryService;
 import libraryapp.service.Service;
 import libraryapp.service.UserCardService;
@@ -22,14 +28,20 @@ public class LibraryApp {
 
     public static void main(String[] args) {
         // define db name
-//        final String SQLITE_DB_NAME = "jdbc:sqlite:C:/temp/java_library.db";
+        final String SQLITE_DB_NAME = "jdbc:sqlite:C:/temp/java_library.db";
 
-        BookCatalogRepository bookCatalogRepository = new BookCatalogRepository();
-        bookCatalogRepository.init();
+        BookRepository bookRepository = new BookRepository();
+        bookRepository.init();
+        BookInfoRepository bookInfoRepository = new BookInfoRepository();
+        bookInfoRepository.init();
+        UserRepository userRepository = new UserRepository();
+        userRepository.init();
         UserCardRepository userCardRepository = new UserCardRepository();
         userCardRepository.init();
         HashMap<String, CrudRepository> repositories = new HashMap<>();
-        repositories.put(bookCatalogRepository.getClass().getSimpleName(), bookCatalogRepository);
+        repositories.put(bookRepository.getClass().getSimpleName(), bookRepository);
+        repositories.put(bookInfoRepository.getClass().getSimpleName(), bookInfoRepository);
+        repositories.put(userRepository.getClass().getSimpleName(),userRepository);
         repositories.put(userCardRepository.getClass().getSimpleName(),userCardRepository);
 
         var menu = getAdminMenu(repositories);
@@ -41,11 +53,11 @@ public class LibraryApp {
     }
 
     private static HashMap<String, IMenu> getAdminMenu(HashMap<String, CrudRepository> repositories) {
-        BookCatalogService bookCatalogService = new BookCatalogService(repositories);
+        BookService bookService = new BookService(repositories);
         UserCardService userCardService = new UserCardService(repositories);
         LibraryService libraryService = new LibraryService(repositories);
         HashMap<String, Service> services = new HashMap<>();
-        services.put(bookCatalogService.getClass().getSimpleName(), bookCatalogService);
+        services.put(bookService.getClass().getSimpleName(), bookService);
         services.put(userCardService.getClass().getSimpleName(), userCardService);
         services.put(libraryService.getClass().getSimpleName(), libraryService);
         HashMap<String, IMenu> menus = getStringIMenuHashMap(services);

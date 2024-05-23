@@ -1,6 +1,6 @@
 package libraryapp.ui;
 
-import libraryapp.service.BookCatalogService;
+import libraryapp.service.BookService;
 import libraryapp.service.Service;
 import libraryapp.ui.button.Back;
 import libraryapp.ui.button.ExitMenu;
@@ -29,11 +29,11 @@ public class BookMenu implements IMenu {
     public BookMenu(HashMap<String, Service> services, IMenu menu) {
         this.menuName=this.getClass().getSimpleName();
         var menuCommands = new ArrayList<MenuCommand>();
-        AddBook addBook = new AddBook(services.get(BookCatalogService.class.getSimpleName()));
-        ViewAllBooks viewAllBooks = new ViewAllBooks(services.get(BookCatalogService.class.getSimpleName()));
-        FindBook findBook = new FindBook(services.get(BookCatalogService.class.getSimpleName()), this);
-        RemoveBook removeBook = new RemoveBook(services.get(BookCatalogService.class.getSimpleName()));
-        Back back = new Back(services.get(BookCatalogService.class.getSimpleName()), menu);
+        AddBook addBook = new AddBook(services.get(BookService.class.getSimpleName()));
+        ViewAllBooks viewAllBooks = new ViewAllBooks(services.get(BookService.class.getSimpleName()));
+        FindBook findBook = new FindBook(services.get(BookService.class.getSimpleName()), this);
+        RemoveBook removeBook = new RemoveBook(services.get(BookService.class.getSimpleName()));
+        Back back = new Back(services.get(BookService.class.getSimpleName()), menu);
         ExitMenu exitMenu = new ExitMenu();
         menuCommands.add(null);
         menuCommands.add(addBook);

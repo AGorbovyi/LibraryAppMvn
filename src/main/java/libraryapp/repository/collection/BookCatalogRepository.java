@@ -1,4 +1,4 @@
-package libraryapp.repository;
+package libraryapp.repository.collection;
 
 import libraryapp.entity.Book;
 

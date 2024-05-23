@@ -1,4 +1,4 @@
-package libraryapp.repository.DB;
+package libraryapp.repository.db;
 
 
 import java.util.Collection;

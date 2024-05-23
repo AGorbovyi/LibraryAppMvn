@@ -1,13 +1,11 @@
-package libraryapp.service;
-
-//import libraryapp.repository.collection.CrudRepository;
-//import libraryapp.repository.collection.UserCardRepository;
+package libraryapp.service.collection;
 
 import libraryapp.entity.Book;
 import libraryapp.entity.User;
 import libraryapp.entity.UserCard;
-import libraryapp.repository.db.CrudRepository;
-import libraryapp.repository.db.UserCardRepository;
+import libraryapp.repository.collection.CrudRepository;
+import libraryapp.repository.collection.UserCardRepository;
+
 import java.util.HashMap;
 
 /**
@@ -17,7 +15,7 @@ import java.util.HashMap;
  * @version 17-Apr-24
  */
 
-public class UserCardService extends Service<CrudRepository, String, UserCardService> implements IService<CrudRepository, String, UserCardService>{
+public class UserCardService extends Service<CrudRepository, String, UserCardService> implements IService<CrudRepository, String, UserCardService> {
 
     public UserCardService(HashMap<String, CrudRepository> repository) {
         super(repository);
@@ -26,14 +24,14 @@ public class UserCardService extends Service<CrudRepository, String, UserCardSer
     public void addNewUserCard(String userName, String userSurname) {
         User user = new User(userName, userSurname);
         UserCard userCard = new UserCard(user);
-        UserCardRepository repository = (UserCardRepository) super.getRepository(UserCardRepository.class.getSimpleName());
-        repository.save(userCard);
+        UserCardRepository repo = (UserCardRepository) super.getRepository(UserCardRepository.class.getSimpleName());
+        repo.put(userCard);
         System.out.println("Reader card added: " + userCard);
     }
 
     public UserCard findUserCardByName(String name) {
-        UserCardRepository repository = (UserCardRepository) super.getRepository(UserCardRepository.class.getSimpleName());
-        for (UserCard userCard : repository.findAll())
+        UserCardRepository repo = (UserCardRepository) super.getRepository(UserCardRepository.class.getSimpleName());
+        for (UserCard userCard : repo.values())
             if (userCard.getUser().getFirstName().equalsIgnoreCase(name)) {
                 System.out.println("Reader card found");
                 return userCard;
@@ -43,8 +41,8 @@ public class UserCardService extends Service<CrudRepository, String, UserCardSer
     }
 
     public UserCard findUserCardById(Integer userId) {
-        UserCardRepository repository = (UserCardRepository) super.getRepository(UserCardRepository.class.getSimpleName());
-        UserCard userCard = repository.get(userId);
+        UserCardRepository repo = (UserCardRepository) super.getRepository(UserCardRepository.class.getSimpleName());
+        UserCard userCard = repo.get(userId);
         if (userCard != null) {
             System.out.println("Reader card is found! " + userCard);
         } else {
@@ -54,8 +52,8 @@ public class UserCardService extends Service<CrudRepository, String, UserCardSer
     }
 
     public boolean closeUserCard(Integer userId) {
-        UserCardRepository repository = (UserCardRepository) super.getRepository(UserCardRepository.class.getSimpleName());
-        UserCard userCard = repository.get(userId);
+        UserCardRepository repo = (UserCardRepository) super.getRepository(UserCardRepository.class.getSimpleName());
+        UserCard userCard = repo.get(userId);
         if (userCard != null) {
             userCard.closeCard();
             return true;
@@ -66,8 +64,8 @@ public class UserCardService extends Service<CrudRepository, String, UserCardSer
     }
 
     public void reopenUserCard(Integer userId) {
-        UserCardRepository repository = (UserCardRepository) super.getRepository(UserCardRepository.class.getSimpleName());
-        UserCard userCard = repository.get(userId);
+        UserCardRepository repo = (UserCardRepository) super.getRepository(UserCardRepository.class.getSimpleName());
+        UserCard userCard = repo.get(userId);
         if (userCard != null) {
             userCard.reopenCard();
             System.out.println("Reader card with ID " + userId + " reopened.");
@@ -77,8 +75,8 @@ public class UserCardService extends Service<CrudRepository, String, UserCardSer
     }
 
     public User findUserByBook(Book book) {
-        UserCardRepository repository = (UserCardRepository) super.getRepository(UserCardRepository.class.getSimpleName());
-        for (UserCard userCard : repository.findAll()) {
+        UserCardRepository repo = (UserCardRepository) super.getRepository(UserCardRepository.class.getSimpleName());
+        for (UserCard userCard : repo.values()) {
             if (userCard.getUserBookList().contains(book)) {
                 return userCard.getUser();
             }
@@ -87,7 +85,7 @@ public class UserCardService extends Service<CrudRepository, String, UserCardSer
     }
 
     public void print() {
-        UserCardRepository repository = (UserCardRepository) super.getRepository(UserCardRepository.class.getSimpleName());
-        repository.findAll().forEach(System.out::println);
+        UserCardRepository repo = (UserCardRepository) super.getRepository(UserCardRepository.class.getSimpleName());
+        repo.values().forEach(System.out::println);
     }
 }

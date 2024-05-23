@@ -1,4 +1,4 @@
-package libraryapp.repository.DB;
+package libraryapp.repository.db;
 
 import libraryapp.entity.User;
 import java.sql.*;
@@ -16,6 +16,9 @@ public class UserRepository implements CrudRepository<Integer, User> {
     private final String SQL_FINDBYID_USER = "SELECT * FROM user WHERE user_id = ? ";
     private final String SQL_DELETE_BY_ID_USER = "DELETE FROM user WHERE user_id =? ";
     private final String SQL_FIND_ALL_USER = "SELECT * FROM user ";
+
+    public UserRepository() {
+    }
 
     public UserRepository(String javaLibraryDb) {
         this.javaLibraryDb = javaLibraryDb;

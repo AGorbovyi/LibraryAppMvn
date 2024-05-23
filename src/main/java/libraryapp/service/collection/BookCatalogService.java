@@ -1,8 +1,9 @@
-package libraryapp.service;
+package libraryapp.service.collection;
 
 import libraryapp.entity.Book;
-import libraryapp.repository.BookCatalogRepository;
-import libraryapp.repository.CrudRepository;
+import libraryapp.repository.collection.BookCatalogRepository;
+import libraryapp.repository.collection.CrudRepository;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

@@ -1,6 +1,6 @@
 package libraryapp.ui.button.book;
 
-import libraryapp.service.BookCatalogService;
+import libraryapp.service.BookService;
 import libraryapp.service.Service;
 import libraryapp.ui.button.Button;
 import libraryapp.ui.button.MenuCommand;
@@ -13,9 +13,9 @@ import libraryapp.ui.button.MenuCommand;
  **/
 public class ViewAllBooks extends Button  implements MenuCommand {
 
-    private BookCatalogService service;
+    private BookService service;
     public ViewAllBooks(Service service) {
-        this.service= (BookCatalogService) service;
+        this.service= (BookService) service;
     }
 
     @Override

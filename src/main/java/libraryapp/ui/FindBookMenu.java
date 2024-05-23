@@ -1,6 +1,6 @@
 package libraryapp.ui;
 
-import libraryapp.service.BookCatalogService;
+import libraryapp.service.BookService;
 import libraryapp.service.Service;
 import libraryapp.ui.button.Back;
 import libraryapp.ui.button.ExitMenu;
@@ -27,11 +27,11 @@ public class FindBookMenu implements IMenu{
 
     public FindBookMenu(HashMap<String, Service> services, IMenu menu) {
         this.menuName=this.getClass().getSimpleName();
-        BookCatalogService bookCatalogService = (BookCatalogService) services.get(BookCatalogService.class.getSimpleName());
-        FindByAuthor author = new FindByAuthor(bookCatalogService);
-        FindByTitle title = new FindByTitle(bookCatalogService);
-        FindById id = new FindById(bookCatalogService);
-        Back back = new Back(bookCatalogService, menu);
+        BookService bookService = (BookService) services.get(BookService.class.getSimpleName());
+        FindByAuthor author = new FindByAuthor(bookService);
+        FindByTitle title = new FindByTitle(bookService);
+        FindById id = new FindById(bookService);
+        Back back = new Back(bookService, menu);
         ExitMenu exit = new ExitMenu();
 
         List<MenuCommand> menuCommands=new ArrayList<>();

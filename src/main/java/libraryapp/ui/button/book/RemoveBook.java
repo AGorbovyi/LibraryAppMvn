@@ -1,12 +1,10 @@
 package libraryapp.ui.button.book;
 
-import libraryapp.service.BookCatalogService;
+import libraryapp.service.BookService;
 import libraryapp.service.Service;
 import libraryapp.service.util.UserInput;
 import libraryapp.ui.button.Button;
 import libraryapp.ui.button.MenuCommand;
-
-import java.util.UUID;
 
 /**
  * AIT-TR, cohort 42.1, Java Basic, Project1
@@ -16,9 +14,9 @@ import java.util.UUID;
  **/
 public class RemoveBook extends Button  implements MenuCommand {
 
-    private BookCatalogService service;
+    private BookService service;
     public RemoveBook(Service service) {
-        this.service= (BookCatalogService) service;
+        this.service= (BookService) service;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package libraryapp.repository.DB;
+package libraryapp.repository.db;
 
 import libraryapp.entity.Book;
 import libraryapp.entity.BookInfo;
@@ -28,21 +28,21 @@ public class BookRepository implements CrudRepository<Integer, Book> {
     private BookInfoRepository bookInfoRepository;
 
     private final String SQL_DELETE_BOOK_TABLE = "DELETE FROM book";
-    private final String SQL_DELETE_BOOK_INFO_TABLE = "DELETE FROM book_info";
+//    private final String SQL_DELETE_BOOK_INFO_TABLE = "DELETE FROM book_info";
     private final String SQL_INSERT_BOOK = "INSERT INTO book (author, title, genre, publisher) VALUES (?, ?, ?, ?)";
-    private final String SQL_INSERT_BOOK_INFO = "INSERT INTO book_info (id, is_in_library, borrowed_to, borrowed_date, borrowed_duration, return_date) VALUES (?, ?, ?, ?, ?, ?)";
-    private final String SQL_UPDATE_BOOK = "UPDATE book SET author = ?, title = ?, genre = ?, publisher = ? WHERE id = ?";
-    private final String SQL_UPDATE_BOOK_INFO = "UPDATE book_info SET is_in_library = ?, borrowed_to = ?, borrowed_date = ?, borrowed_duration = ?, return_date = ? WHERE id = ?";
-    private final String SQL_FIND_BOOK_BY_ID = "SELECT * FROM book WHERE id = ?";
-    private final String SQL_FIND_BOOK_INFO_BY_ID = "SELECT * FROM book_info WHERE id = ?";
+//    private final String SQL_INSERT_BOOK_INFO = "INSERT INTO book_info (id, is_in_library, borrowed_to, borrowed_date, borrowed_duration, return_date) VALUES (?, ?, ?, ?, ?, ?)";
+    private final String SQL_UPDATE_BOOK = "UPDATE book SET author = ?, title = ?, genre = ?, publisher = ? WHERE book_id = ?";
+//    private final String SQL_UPDATE_BOOK_INFO = "UPDATE book_info SET is_in_library = ?, borrowed_to = ?, borrowed_date = ?, borrowed_duration = ?, return_date = ? WHERE id = ?";
+    private final String SQL_FIND_BOOK_BY_ID = "SELECT * FROM book WHERE book_id = ?";
+//    private final String SQL_FIND_BOOK_INFO_BY_ID = "SELECT * FROM book_info WHERE id = ?";
     private final String SQL_FIND_ALL_BOOKS = "SELECT * FROM book";
-    private final String SQL_DELETE_BOOK_BY_ID = "DELETE FROM book WHERE id = ?";
-    private final String SQL_DELETE_BOOK_INFO_BY_ID = "DELETE FROM book_info WHERE id = ?";
+    private final String SQL_DELETE_BOOK_BY_ID = "DELETE FROM book WHERE book_id = ?";
+//    private final String SQL_DELETE_BOOK_INFO_BY_ID = "DELETE FROM book_info WHERE id = ?";
 
     public BookRepository() {
     }
 
-    public BookRepository(String java_library_db) {
+    public BookRepository(String java_library_db, BookInfoRepository bookInfoRepository) {
         this.java_library_db = java_library_db;
         this.bookInfoRepository = new BookInfoRepository(java_library_db);
         init();
@@ -52,7 +52,8 @@ public class BookRepository implements CrudRepository<Integer, Book> {
     public void save(Book book) {
         try (Connection connection = DriverManager.getConnection(java_library_db);
              PreparedStatement psiBook = connection.prepareStatement(SQL_INSERT_BOOK, Statement.RETURN_GENERATED_KEYS);
-             PreparedStatement psiBookInfo = connection.prepareStatement(SQL_INSERT_BOOK_INFO)) {
+//             PreparedStatement psiBookInfo = connection.prepareStatement(SQL_INSERT_BOOK_INFO)
+             ) {
             if (book.getBookId() == null) {
                 // insert book
                 psiBook.setString(1, book.getAuthor());
@@ -64,20 +65,21 @@ public class BookRepository implements CrudRepository<Integer, Book> {
                 ResultSet rs = psiBook.getGeneratedKeys();
                 if (rs.next()) {
                     int generatedId = rs.getInt(1);
-                    book.setId(generatedId);
-                    book.getBookInfo().setId(generatedId);
+//                    book.setId(generatedId);
+//                    book.getBookInfo().setId(generatedId);
                 }
 
-                psiBookInfo.setInt(1, book.getBookId());
-                psiBookInfo.setBoolean(2, book.getBookInfo().isInLibrary());
-                psiBookInfo.setObject(3, book.getBookInfo().getBorrowedTo(), Types.INTEGER);
-                psiBookInfo.setObject(4, book.getBookInfo().getBorrowedDate(), Types.DATE);
-                psiBookInfo.setObject(5, book.getBookInfo().getBorrowedDuration(), Types.INTEGER);
-                psiBookInfo.setObject(6, book.getBookInfo().getReturnDate(), Types.DATE);
-                psiBookInfo.executeUpdate();
+//                psiBookInfo.setInt(1, book.getBookId());
+//                psiBookInfo.setBoolean(2, book.getBookInfo().isInLibrary());
+//                psiBookInfo.setObject(3, book.getBookInfo().getBorrowedTo(), Types.INTEGER);
+//                psiBookInfo.setObject(4, book.getBookInfo().getBorrowedDate(), Types.DATE);
+//                psiBookInfo.setObject(5, book.getBookInfo().getBorrowedDuration(), Types.INTEGER);
+//                psiBookInfo.setObject(6, book.getBookInfo().getReturnDate(), Types.DATE);
+//                psiBookInfo.executeUpdate();
             } else {
                 try (PreparedStatement psuBook = connection.prepareStatement(SQL_UPDATE_BOOK);
-                     PreparedStatement psuBookInfo = connection.prepareStatement(SQL_UPDATE_BOOK_INFO)) {
+//                     PreparedStatement psuBookInfo = connection.prepareStatement(SQL_UPDATE_BOOK_INFO)
+                ) {
                     psuBook.setString(1, book.getAuthor());
                     psuBook.setString(2, book.getBookTitle());
                     psuBook.setString(3, book.getGenre());
@@ -85,13 +87,13 @@ public class BookRepository implements CrudRepository<Integer, Book> {
                     psuBook.setInt(5, book.getBookId());
                     psuBook.executeUpdate();
 
-                    psuBookInfo.setBoolean(1, book.getBookInfo().isInLibrary());
-                    psuBookInfo.setObject(2, book.getBookInfo().getBorrowedTo(), Types.INTEGER);
-                    psuBookInfo.setObject(3, book.getBookInfo().getBorrowedDate(), Types.DATE);
-                    psuBookInfo.setObject(4, book.getBookInfo().getBorrowedDuration(), Types.INTEGER);
-                    psuBookInfo.setObject(5, book.getBookInfo().getReturnDate(), Types.DATE);
-                    psuBookInfo.setInt(6, book.getBookId());
-                    psuBookInfo.executeUpdate();
+//                    psuBookInfo.setBoolean(1, book.getBookInfo().isInLibrary());
+//                    psuBookInfo.setObject(2, book.getBookInfo().getBorrowedTo(), Types.INTEGER);
+//                    psuBookInfo.setObject(3, book.getBookInfo().getBorrowedDate(), Types.DATE);
+//                    psuBookInfo.setObject(4, book.getBookInfo().getBorrowedDuration(), Types.INTEGER);
+//                    psuBookInfo.setObject(5, book.getBookInfo().getReturnDate(), Types.DATE);
+//                    psuBookInfo.setInt(6, book.getBookId());
+//                    psuBookInfo.executeUpdate();
                 }
             }
         } catch (SQLException e) {
@@ -104,7 +106,8 @@ public class BookRepository implements CrudRepository<Integer, Book> {
         Book book = null;
         try (Connection connection = DriverManager.getConnection(java_library_db);
              PreparedStatement psBook = connection.prepareStatement(SQL_FIND_BOOK_BY_ID);
-             PreparedStatement psBookInfo = connection.prepareStatement(SQL_FIND_BOOK_INFO_BY_ID)) {
+//             PreparedStatement psBookInfo = connection.prepareStatement(SQL_FIND_BOOK_INFO_BY_ID)
+        ) {
             psBook.setInt(1, id);
             ResultSet rsBook = psBook.executeQuery();
             if (rsBook.next()) {
@@ -119,7 +122,7 @@ public class BookRepository implements CrudRepository<Integer, Book> {
                 psBookInfo.setInt(1, id);
                 ResultSet rsBookInfo = psBookInfo.executeQuery();
                 if (rsBookInfo.next()) {
-                    bookInfo.setId(rsBookInfo.getInt("book_info_id"));
+//                    bookInfo.setId(rsBookInfo.getInt("book_info_id"));
                     bookInfo.setInLibrary(rsBookInfo.getBoolean("is_in_library"));
                     bookInfo.setBorrowedTo(rsBookInfo.getInt("borrowed_to"));
                     bookInfo.setBorrowedDate(rsBookInfo.getDate("borrowed_date").toLocalDate());
@@ -138,12 +141,13 @@ public class BookRepository implements CrudRepository<Integer, Book> {
     public boolean remove(Integer id) {
         try (Connection connection = DriverManager.getConnection(java_library_db);
              PreparedStatement psBook = connection.prepareStatement(SQL_DELETE_BOOK_BY_ID);
-             PreparedStatement psBookInfo = connection.prepareStatement(SQL_DELETE_BOOK_INFO_BY_ID)) {
+//             PreparedStatement psBookInfo = connection.prepareStatement(SQL_DELETE_BOOK_INFO_BY_ID)
+        ) {
             psBook.setInt(1, id);
             psBook.executeUpdate();
 
-            psBookInfo.setInt(1, id);
-            psBookInfo.executeUpdate();
+//            psBookInfo.setInt(1, id);
+//            psBookInfo.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -171,7 +175,7 @@ public class BookRepository implements CrudRepository<Integer, Book> {
                     psBookInfo.setInt(1, book.getBookId());
                     ResultSet rsBookInfo = psBookInfo.executeQuery();
                     if (rsBookInfo.next()) {
-                        bookInfo.setId(rsBookInfo.getInt("book_info_id"));
+//                        bookInfo.setId(rsBookInfo.getInt("book_info_id"));
                         bookInfo.setInLibrary(rsBookInfo.getBoolean("is_in_library"));
                         bookInfo.setBorrowedTo(rsBookInfo.getInt("borrowed_to"));
                         bookInfo.setBorrowedDate(rsBookInfo.getDate("borrowed_date").toLocalDate());
