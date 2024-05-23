@@ -22,12 +22,10 @@ public class BorrowBook extends Button  implements MenuCommand {
 
     @Override
     public void executeCommand() {
-        String bookId = UserInput.getText("Book catalog number to be borrowed to the reader: ");
-        String userId = UserInput.getText("Card ID of the user who borrows a book: ");
-        UUID bookUid = UUID.fromString(bookId);
-        UUID userUid = UUID.fromString(userId);
+        Integer bookId = UserInput.getInt("Book catalog number to be borrowed to the reader: ");
+        Integer userId = UserInput.getInt("Card ID of the user who borrows a book: ");
         LibraryService libraryService = (LibraryService) super.getService(LibraryService.class.getSimpleName());
-        libraryService.borrowBookFromLibrary(bookUid, userUid);
+        libraryService.borrowBookFromLibrary(bookId, userId);
     }
 
     @Override

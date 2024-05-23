@@ -44,6 +44,14 @@ public class UserCard {
         this.isClosed = true;
     }
 
+    public Integer getUserCardId() {
+        return userCardId;
+    }
+
+    public void setUserCardId(Integer userCardId) {
+        this.userCardId = userCardId;
+    }
+
     public List<Book> getUserBorrowedBooks() {
         return borrowedBooks;
     }

@@ -11,25 +11,27 @@ import java.util.*;
  * @version 22-Apr-24
  */
 
-public class BookCatalogRepository implements CrudRepository<UUID, Book> {
-    private final Map<UUID, Book> bookMap;
+public class BookCatalogRepository implements CrudRepository<Integer, Book> {
+    private final Map<Integer, Book> bookMap;
 
     public BookCatalogRepository () {
         bookMap = new HashMap<>();
     }
 
-    public Map<UUID, Book> getBookMap() {
+    public Map<Integer, Book> getBookMap() {
         return bookMap;
     }
 
 
     @Override
     public void put (Book book) {
-        bookMap.put(book.getBookId(), book);
+        Integer id = bookMap.size() + 1;
+        book.setBookId(id);
+        bookMap.put(id, book);
     }
 
     @Override
-    public Book get(UUID bookId) {
+    public Book get(Integer bookId) {
         for (var book : bookMap.values()){
             if (book.getBookId().equals(bookId)){
                 return book;

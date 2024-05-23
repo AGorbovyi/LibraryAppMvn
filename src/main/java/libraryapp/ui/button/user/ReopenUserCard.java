@@ -23,10 +23,9 @@ public class ReopenUserCard  extends Button implements MenuCommand {
 
     @Override
     public void executeCommand() {
-        String userId=UserInput.getText("Enter reader ID: ");
-        var uid = UUID.fromString(userId);
+        Integer userId = UserInput.getInt("Enter reader ID: ");
         UserCardService userCardService = (UserCardService) super.getService(UserCardService.class.getSimpleName());
-        userCardService.reopenUserCard(uid);
+        userCardService.reopenUserCard(userId);
     }
 
     @Override

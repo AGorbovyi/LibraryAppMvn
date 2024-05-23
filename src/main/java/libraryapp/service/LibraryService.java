@@ -50,6 +50,7 @@ public class LibraryService extends Service<CrudRepository, String, UserCardServ
                 bookInfo.setBorrowedTo(userCardId);
                 bookInfo.setBorrowedDuration(14);
                 bookInfo.setBorrowedDate(LocalDate.now());
+                bookInfo.setBookInfoId(bookId);
                 bookInfo.getReturnDate();
                 book.setBookInfo(bookInfo);
                 User user = userCard.getUser();

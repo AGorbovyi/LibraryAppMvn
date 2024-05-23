@@ -22,7 +22,7 @@ public class LibraryApp {
 
     public static void main(String[] args) {
         // define db name
-        final String SQLITE_DB_NAME = "jdbc:sqlite:C:/temp/java_library.db";
+//        final String SQLITE_DB_NAME = "jdbc:sqlite:C:/temp/java_library.db";
 
         BookCatalogRepository bookCatalogRepository = new BookCatalogRepository();
         bookCatalogRepository.init();

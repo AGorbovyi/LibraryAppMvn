@@ -8,7 +8,7 @@ package libraryapp.entity;
  **/
 
 public class User {
-    private final Integer userId;
+    private Integer userId;
     private final String firstName;
     private final String lastName;
 
@@ -32,6 +32,10 @@ public class User {
 
     public Integer getUserId() {
         return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public User getUser() {

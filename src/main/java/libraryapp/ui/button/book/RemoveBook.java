@@ -23,9 +23,8 @@ public class RemoveBook extends Button  implements MenuCommand {
 
     @Override
     public void executeCommand() {
-        String bookCatalogNumberRemove = UserInput.getText("Enter book catalog number: ");
-        UUID uid = UUID.fromString(bookCatalogNumberRemove);
-        boolean remove = service.removeBook(uid);
+        int bookCatalogNumberRemove = UserInput.getInt("Enter book catalog number: ");
+        boolean remove = service.removeBook(bookCatalogNumberRemove);
         if (remove) {
             System.out.println("Book was removed from catalog");
         } else {

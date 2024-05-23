@@ -6,7 +6,6 @@ import libraryapp.service.util.UserInput;
 import libraryapp.ui.button.Button;
 import libraryapp.ui.button.MenuCommand;
 
-import java.util.UUID;
 
 /**
  * AIT-TR, cohort 42.1, Java Basic, Project1
@@ -23,10 +22,9 @@ public class CloseUserCard extends Button  implements MenuCommand {
 
     @Override
     public void executeCommand() {
-        String userID=UserInput.getText("Enter reader ID: ");
-        var uid = UUID.fromString(userID);
+        Integer userId = UserInput.getInt("Enter reader ID: ");
         UserCardService userCardService = (UserCardService) super.getService(UserCardService.class.getSimpleName());
-        boolean ok = userCardService.closeUserCard(uid);
+        boolean ok = userCardService.closeUserCard(userId);
         if (ok) {
             System.out.println("Reader's card is successfully closed!");
         } else {

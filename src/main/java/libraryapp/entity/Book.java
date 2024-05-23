@@ -1,7 +1,7 @@
 package libraryapp.entity;
 
 public class Book {
-    private final Integer bookId;
+    private Integer bookId;
     private String author;
     private String bookTitle;
     private String genre;
@@ -51,12 +51,17 @@ public class Book {
         return bookId;
     }
 
+    public void setBookId(Integer bookId) {
+        this.bookId = bookId;
+    }
+
     public BookInfo getBookInfo() {
         return this.bookInfo;
     }
     public void setBookInfo(BookInfo bookInfo){
         this.bookInfo = bookInfo;
     }
+
 
     @Override
     public String toString() {

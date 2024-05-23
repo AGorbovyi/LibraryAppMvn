@@ -6,8 +6,6 @@ import libraryapp.service.util.UserInput;
 import libraryapp.ui.button.Button;
 import libraryapp.ui.button.MenuCommand;
 
-import java.util.UUID;
-
 /**
  * AIT-TR, cohort 42.1, Java Basic, Project1
  *
@@ -22,10 +20,9 @@ public class ReturnBook extends Button  implements MenuCommand {
 
     @Override
     public void executeCommand() {
-        String bookId = UserInput.getText("Book catalog number for return to the library: ");
-        var bookUid = UUID.fromString(bookId);
+        Integer bookId = UserInput.getInt("Book catalog number for return to the library: ");
         LibraryService libraryService = (LibraryService) super.getService(LibraryService.class.getSimpleName());
-        libraryService.returnBookToLibrary(bookUid);
+        libraryService.returnBookToLibrary(bookId);
     }
 
     @Override

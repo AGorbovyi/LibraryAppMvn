@@ -12,8 +12,8 @@ import java.util.*;
  * @version 21-Apr-24
  **/
 
-public class UserCardRepository implements CrudRepository<UUID, UserCard> {
-    private Map<UUID, UserCard> userCards;
+public class UserCardRepository implements CrudRepository<Integer, UserCard> {
+    private Map<Integer, UserCard> userCards;
 
     public UserCardRepository() {
         this.userCards = new HashMap<>();
@@ -21,11 +21,15 @@ public class UserCardRepository implements CrudRepository<UUID, UserCard> {
 
     @Override
     public void put(UserCard value) {
-        userCards.put(value.getUserId(), value);
+        Integer id = this.userCards.size() + 1;
+        User user = value.getUser();
+        user.setUserId(id);
+        value.setUserCardId(id);
+        userCards.put(id, value);
     }
 
     @Override
-    public UserCard get(UUID key) {
+    public UserCard get(Integer key) {
         for (UserCard card : userCards.values()) {
             if (card.getUserId().equals(key)) {
                 return card;

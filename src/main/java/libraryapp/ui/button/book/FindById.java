@@ -7,8 +7,6 @@ import libraryapp.service.util.UserInput;
 import libraryapp.ui.button.Button;
 import libraryapp.ui.button.MenuCommand;
 
-import java.util.UUID;
-
 /**
  * AIT-TR, cohort 42.1, Java Basic, Project1
  *
@@ -23,10 +21,9 @@ public class FindById extends Button  implements MenuCommand {
 
     @Override
     public void executeCommand() {
-        String id = UserInput.getText("Enter book ID: ");
+        int id = UserInput.getInt("Enter book ID: ");
         BookCatalogService bookCatalogService= (BookCatalogService) super.getService(BookCatalogService.class.getSimpleName());
-        UUID uid = UUID.fromString(id);
-        Book book = bookCatalogService.findByCatalogNumber(uid);
+        Book book = bookCatalogService.findByCatalogNumber(id);
         if (book != null) {
             System.out.println(book);
         } else{
