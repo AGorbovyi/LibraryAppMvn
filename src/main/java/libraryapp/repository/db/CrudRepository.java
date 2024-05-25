@@ -13,11 +13,11 @@ public interface CrudRepository<K, V> {
 
     void save(V value);
 
-    V get(K id);
+    V get(K key);
 
-    V get(Integer id);
+//    V get(Integer id);
 
-    boolean remove(Integer id);
+    boolean remove(K key);
 
     Collection<V> findAll();
 

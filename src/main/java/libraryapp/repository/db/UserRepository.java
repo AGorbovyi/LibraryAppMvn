@@ -11,8 +11,8 @@ public class UserRepository implements CrudRepository<Integer, User> {
             "    user_id        INTEGER PRIMARY KEY AUTOINCREMENT," +
             "    first_name     TEXT  NOT NULL," +
             "    last_name      TEXT NOT NULL )";
-    private final String SQL_INSERT_USER = "INSERT INTO user (user_id,first_name,last_name) VALUES (?,?,?) ";
-    private final String SQL_UPDATE_USER = "UPDATE user SET user_id=?,first_name=?,last_name=? WHERE id = ? ";
+    private final String SQL_INSERT_USER = "INSERT INTO user (first_name,last_name) VALUES (?,?,?) ";
+    private final String SQL_UPDATE_USER = "UPDATE user SET first_name = ?,last_name = ? WHERE user_id = ? ";
     private final String SQL_FINDBYID_USER = "SELECT * FROM user WHERE user_id = ? ";
     private final String SQL_DELETE_BY_ID_USER = "DELETE FROM user WHERE user_id =? ";
     private final String SQL_FIND_ALL_USER = "SELECT * FROM user ";

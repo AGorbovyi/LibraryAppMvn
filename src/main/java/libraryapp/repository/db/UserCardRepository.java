@@ -24,16 +24,16 @@ public class UserCardRepository implements CrudRepository<Integer, UserCard> {
     private final String SQL_CREATE_TABLE = "CREATE TABLE user_card (" +
             "    user_card_id   INTEGER PRIMARY KEY AUTOINCREMENT," +
             "    books_limit    INTEGER NOT NULL," +
-            "    is_closed      BOOLEAN NOT NULL)" +
+            "    is_closed      BOOLEAN NOT NULL," +
             "    user_id        INTEGER NOT NULL," +
-            "    FOREIGN KEY (user_id ) " +
-            "       REFERENCES user (user_id ) " +
+            "    FOREIGN KEY (user_id) " +
+            "       REFERENCES user (user_id) " +
             "           ON DELETE CASCADE " +
             "           ON UPDATE NO ACTION )";
-    private final String SQL_INSERT = "INSERT INTO user_card (user_id,books_limit,is_closed) VALUES (?,?,?) ";
-    private final String SQL_UPDATE = "UPDATE user_card SET user_id=?,books_limit=?,is_closed=? WHERE id = ? ";
-    private final String SQL_GET = "SELECT * FROM user_card WHERE id = ? ";
-    private final String SQL_DELETE_BY_ID = "DELETE FROM user_card WHERE id =? ";
+    private final String SQL_INSERT = "INSERT INTO user_card (books_limit,is_closed) VALUES (?,?,?) ";
+    private final String SQL_UPDATE = "UPDATE user_card SET books_limit = ?,is_closed = ? WHERE user_card_id = ? ";
+    private final String SQL_GET = "SELECT * FROM user_card WHERE user_card_id  = ? ";
+    private final String SQL_DELETE_BY_ID = "DELETE FROM user_card WHERE user_card_id =? ";
     private final String SQL_FIND_ALL = "SELECT * FROM user_card ";
 
     public UserCardRepository() {

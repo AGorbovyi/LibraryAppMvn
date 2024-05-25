@@ -27,7 +27,7 @@ public class BookRepository implements CrudRepository<Integer, Book> {
             "           ON UPDATE NO ACTION )";
     private BookInfoRepository bookInfoRepository;
 
-    private final String SQL_DELETE_BOOK_TABLE = "DELETE FROM book";
+//    private final String SQL_DELETE_TABLE_BOOK_TABLE = "DELETE FROM book";
 //    private final String SQL_DELETE_BOOK_INFO_TABLE = "DELETE FROM book_info";
     private final String SQL_INSERT_BOOK = "INSERT INTO book (author, title, genre, publisher) VALUES (?, ?, ?, ?)";
 //    private final String SQL_INSERT_BOOK_INFO = "INSERT INTO book_info (id, is_in_library, borrowed_to, borrowed_date, borrowed_duration, return_date) VALUES (?, ?, ?, ?, ?, ?)";
@@ -39,8 +39,8 @@ public class BookRepository implements CrudRepository<Integer, Book> {
     private final String SQL_DELETE_BOOK_BY_ID = "DELETE FROM book WHERE book_id = ?";
 //    private final String SQL_DELETE_BOOK_INFO_BY_ID = "DELETE FROM book_info WHERE id = ?";
 
-    public BookRepository() {
-    }
+//    public BookRepository() {
+//    }
 
     public BookRepository(String java_library_db, BookInfoRepository bookInfoRepository) {
         this.java_library_db = java_library_db;
@@ -192,18 +192,19 @@ public class BookRepository implements CrudRepository<Integer, Book> {
         return books;
     }
 
-    @Override
-    public void deleteAll() {
-        try (Connection connection = DriverManager.getConnection(java_library_db);
-             Statement stmt = connection.createStatement()) {
-            stmt.executeUpdate(SQL_DELETE_BOOK_TABLE);
-            stmt.executeUpdate(SQL_DELETE_BOOK_INFO_TABLE);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
+//    @Override
+//    public void deleteAll() {
+//        try (Connection connection = DriverManager.getConnection(java_library_db);
+//             Statement stmt = connection.createStatement()) {
+//            stmt.executeUpdate(SQL_DELETE_BOOK_TABLE);
+//            stmt.executeUpdate(SQL_DELETE_BOOK_INFO_TABLE);
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
     @Override
     public void init() {
+        // такой же как в BookInfo
         try (Connection connection = DriverManager.getConnection(java_library_db);
              Statement stmt = connection.createStatement()) {
             stmt.executeUpdate(SQL_CREATE_BOOK_TABLE);
@@ -211,7 +212,7 @@ public class BookRepository implements CrudRepository<Integer, Book> {
             throw new RuntimeException(e);
         }
 
-        bookInfoRepository.init();
+//        bookInfoRepository.init();
     }
 
     public List<Book> findByAuthor(String author) {

@@ -14,15 +14,15 @@ public class BookInfoRepository implements CrudRepository<Integer, BookInfo> {
             "    borrowed_date      DATE," +
             "    borrowed_duration  INTEGER," +
             "    return_date        DATE )";
-    private final String SQL_DELETE_BOOK_INFO_TABLE = "DELETE FROM book_info";
+//    private final String SQL_DELETE_BOOK_INFO_TABLE = "DELETE FROM book_info";
     private final String SQL_INSERT_BOOK_INFO = "INSERT INTO book_info (is_in_library, borrowed_to, borrowed_date, borrowed_duration, return_date) VALUES (?, ?, ?, ?, ?)";
-    private final String SQL_UPDATE_BOOK_INFO = "UPDATE book_info SET is_in_library = ?, borrowed_to = ?, borrowed_date = ?, borrowed_duration = ?, return_date = ? WHERE id = ?";
-    private final String SQL_FIND_BOOK_INFO_BY_ID = "SELECT * FROM book_info WHERE id = ?";
+    private final String SQL_UPDATE_BOOK_INFO = "UPDATE book_info SET is_in_library = ?, borrowed_to = ?, borrowed_date = ?, borrowed_duration = ?, return_date = ? WHERE book_info_id = ?";
+    private final String SQL_FIND_BOOK_INFO_BY_ID = "SELECT * FROM book_info WHERE book_info_id = ?";
     private final String SQL_FIND_ALL_BOOK_INFO = "SELECT * FROM book_info";
-    private final String SQL_DELETE_BOOK_INFO_BY_ID = "DELETE FROM book_info WHERE id = ?";
+    private final String SQL_DELETE_BOOK_INFO_BY_ID = "DELETE FROM book_info WHERE book_info_id = ?";
 
-    public BookInfoRepository() {
-    }
+//    public BookInfoRepository() {
+//    }
 
     public BookInfoRepository(String java_library_db) {
         this.java_library_db = java_library_db;

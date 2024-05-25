@@ -27,7 +27,6 @@ public class BookService extends Service<CrudRepository, String, BookService> im
         System.out.println("Book added: " + book);
     }
 
-
     public Book get(Integer bookId ) {
         BookRepository repository = (BookRepository) super.getRepository(BookRepository.class.getSimpleName());
         return repository.get(bookId);
